@@ -100,8 +100,8 @@ This query marks strings, object keys, and numbers for highlighting. The followi
 | @constant                | Captures constants                     |
 | @constructor             | Captures constructors                  |
 | @embedded                | Captures embedded content              |
-| @emphasis                | Captures emphasieditsync text               |
-| @emphasis.strong         | Captures strongly emphasieditsync text      |
+| @emphasis                | Captures emphasieditsync text          |
+| @emphasis.strong         | Captures strongly emphasieditsync text |
 | @enum                    | Captures enumerations                  |
 | @function                | Captures functions                     |
 | @hint                    | Captures hints                         |
