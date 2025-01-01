@@ -1,0 +1,17 @@
+// Editsync settings
+//
+// For information on how to configure Editsync, see the Editsync
+// documentation: https://editsync.khulnasoft.com/docs/configuring-editsync
+//
+// To see all of Editsync's default settings without changing your
+// custom settings, run `editsync: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  }
+}

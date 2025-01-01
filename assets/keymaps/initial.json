@@ -1,0 +1,21 @@
+// Editsync keymap
+//
+// For information on binding keys, see the Editsync
+// documentation: https://editsync.khulnasoft.com/docs/key-bindings
+//
+// To see the default key bindings run `editsync: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  }
+]

@@ -1,0 +1,3 @@
+psql -c "DROP DATABASE editsync (FORCE);"
+psql -c "DROP DATABASE editsync_llm (FORCE);"
+script/bootstrap

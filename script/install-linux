@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+if [[ $# -gt 0 ]]; then
+  echo "
+  Usage: ${0##*/}
+  Builds and installs editsync onto your system into ~/.local, making it available as ~/.local/bin/editsync.
+
+  Before running this you should ensure you have all the build dependencies installed with `./script/linux`.
+  "
+  exit 1
+fi
+export EDITSYNC_CHANNEL=$(<crates/editsync/RELEASE_CHANNEL)
+export EDITSYNC_UPDATE_EXPLANATION="You need to fetch and rebuild editsync in $(pwd)"
+script/bundle-linux
+
+target="linux-$(uname -m)"
+commit=$(git rev-parse HEAD | cut -c 1-7)
+if  [[ "$EDITSYNC_CHANNEL" == "dev" ]]; then
+  archive="editsync-${commit}-${target}.tar.gz"
+else
+  archive="editsync-${target}.tar.gz"
+fi
+export EDITSYNC_BUNDLE_PATH="${CARGO_TARGET_DIR:-target}/release/${archive}"
+script/install.sh

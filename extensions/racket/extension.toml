@@ -1,0 +1,11 @@
+id = "racket"
+name = "Racket"
+description = "Racket support."
+version = "0.0.1"
+schema_version = 1
+authors = ["Mikayla Maki <mikayla@khulnasoft.com>"]
+repository = "https://github.com/khulnasoft/editsync"
+
+[grammars.racket]
+repository = "https://github.com/khulnasoft/tree-sitter-racket"
+commit = "beb29de2b668110e69df0c6d51649c3e2c91d863"

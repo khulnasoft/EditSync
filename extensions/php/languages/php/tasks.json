@@ -1,0 +1,19 @@
+[
+  {
+    "label": "phpunit test $EDITSYNC_SYMBOL",
+    "command": "./vendor/bin/phpunit",
+    "args": ["--filter $EDITSYNC_SYMBOL $EDITSYNC_FILE"],
+    "tags": ["phpunit-test"]
+  },
+  {
+    "label": "pest test $EDITSYNC_SYMBOL",
+    "command": "./vendor/bin/pest",
+    "args": ["--filter \"$EDITSYNC_SYMBOL\" $EDITSYNC_FILE"],
+    "tags": ["pest-test"]
+  },
+  {
+    "label": "execute selection $EDITSYNC_SELECTED_TEXT",
+    "command": "php",
+    "args": ["-r", "$EDITSYNC_SELECTED_TEXT"]
+  }
+]
