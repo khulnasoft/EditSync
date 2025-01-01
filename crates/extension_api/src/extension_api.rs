@@ -14,7 +14,7 @@ pub use serde_json;
 // We explicitly enumerate the symbols we want to re-export, as there are some
 // that we may want to shadow to provide a cleaner Rust API.
 pub use wit::{
-    download_file, make_file_executable,
+    download_file,
     editsync::extension::github::{
         github_release_by_tag_name, latest_github_release, GithubRelease, GithubReleaseAsset,
         GithubReleaseOptions,
@@ -27,8 +27,9 @@ pub use wit::{
     editsync::extension::slash_command::{
         SlashCommand, SlashCommandArgumentCompletion, SlashCommandOutput, SlashCommandOutputSection,
     },
-    CodeLabel, CodeLabelSpan, CodeLabelSpanLiteral, Command, DownloadedFileType, EnvVars,
-    KeyValueStore, LanguageServerInstallationStatus, Project, Range, Worktree,
+    make_file_executable, CodeLabel, CodeLabelSpan, CodeLabelSpanLiteral, Command,
+    DownloadedFileType, EnvVars, KeyValueStore, LanguageServerInstallationStatus, Project, Range,
+    Worktree,
 };
 
 // Undocumented WIT re-exports.
@@ -62,7 +63,7 @@ pub trait Extension: Send + Sync {
     /// Returns a new instance of the extension.
     fn new() -> Self
     where
-        Self: Sieditsync;
+        Self: Sized;
 
     /// Returns the command used to start the language server for the specified
     /// language.
@@ -188,7 +189,8 @@ static mut EXTENSION: Option<Box<dyn Extension>> = None;
 #[cfg(target_arch = "wasm32")]
 #[link_section = "editsync:api-version"]
 #[doc(hidden)]
-pub static EDITSYNC_API_VERSION: [u8; 6] = *include_bytes!(concat!(env!("OUT_DIR"), "/version_bytes"));
+pub static EDITSYNC_API_VERSION: [u8; 6] =
+    *include_bytes!(concat!(env!("OUT_DIR"), "/version_bytes"));
 
 mod wit {
     #![allow(clippy::too_many_arguments, clippy::missing_safety_doc)]
