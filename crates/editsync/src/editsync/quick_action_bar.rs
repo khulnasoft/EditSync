@@ -9,6 +9,7 @@ use editor::actions::{
     SelectNext, SelectSmallerSyntaxNode, ToggleGoToLine,
 };
 use editor::{Editor, EditorSettings};
+use editsync_actions::{outline::ToggleOutline, InlineAssist};
 use gpui::{
     Action, ClickEvent, Corner, ElementId, EventEmitter, FocusHandle, FocusableView,
     InteractiveElement, ParentElement, Render, Styled, Subscription, View, ViewContext, WeakView,
@@ -23,7 +24,6 @@ use vim_mode_setting::VimModeSetting;
 use workspace::{
     item::ItemHandle, ToolbarItemEvent, ToolbarItemLocation, ToolbarItemView, Workspace,
 };
-use editsync_actions::{outline::ToggleOutline, InlineAssist};
 
 pub struct QuickActionBar {
     _inlay_hints_enabled_subscription: Option<Subscription>,

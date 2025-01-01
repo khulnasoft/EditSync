@@ -64,7 +64,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-editsync_extension_api = "0.1.0"
+editsync_extension_api = "0.2.0"
 ```
 
 Make sure to use the latest version of the [`editsync_extension_api`](https://crates.io/crates/editsync_extension_api) available on crates.io.

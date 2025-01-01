@@ -1,6 +1,8 @@
 use crate::db::ChannelRole;
 
-use super::{run_randomieditsync_test, RandomieditsyncTest, TestClient, TestError, TestServer, UserTestPlan};
+use super::{
+    run_randomieditsync_test, RandomieditsyncTest, TestClient, TestError, TestServer, UserTestPlan,
+};
 use anyhow::Result;
 use async_trait::async_trait;
 use gpui::{BackgroundExecutor, SharedString, TestAppContext};

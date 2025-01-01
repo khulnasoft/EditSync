@@ -196,7 +196,9 @@ impl EditsyncSyntaxToken {
             EditsyncSyntaxToken::Boolean => vec!["constant.language"],
             EditsyncSyntaxToken::Comment => vec!["comment"],
             EditsyncSyntaxToken::CommentDoc => vec!["comment.block.documentation"],
-            EditsyncSyntaxToken::Constant => vec!["constant", "constant.language", "constant.character"],
+            EditsyncSyntaxToken::Constant => {
+                vec!["constant", "constant.language", "constant.character"]
+            }
             EditsyncSyntaxToken::Constructor => {
                 vec![
                     "entity.name.tag",

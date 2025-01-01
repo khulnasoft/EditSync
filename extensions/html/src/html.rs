@@ -1,6 +1,6 @@
-use std::{env, fs};
 use editsync::settings::LspSettings;
 use editsync_extension_api::{self as editsync, LanguageServerId, Result};
+use std::{env, fs};
 
 const SERVER_PATH: &str =
     "node_modules/@khulnasoft/vscode-langservers-extracted/bin/vscode-html-language-server";

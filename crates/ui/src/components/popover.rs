@@ -82,7 +82,7 @@ impl Popover {
 
     pub fn aside(mut self, aside: impl IntoElement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.aside = Some(aside.into_element().into_any());
         self

@@ -113,7 +113,7 @@ pub enum TestError {
 }
 
 #[async_trait(?Send)]
-pub trait RandomieditsyncTest: 'static + Sieditsync {
+pub trait RandomieditsyncTest: 'static + Sized {
     type Operation: Send + Clone + Serialize + DeserializeOwned;
 
     fn generate_operation(

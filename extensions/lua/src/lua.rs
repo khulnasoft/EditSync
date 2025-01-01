@@ -1,7 +1,7 @@
-use std::fs;
 use editsync::lsp::CompletionKind;
 use editsync::{CodeLabel, CodeLabelSpan, LanguageServerId};
 use editsync_extension_api::{self as editsync, Result};
+use std::fs;
 
 struct LuaExtension {
     cached_binary_path: Option<String>,
@@ -80,7 +80,9 @@ impl LuaExtension {
                 &asset.download_url,
                 &version_dir,
                 match platform {
-                    editsync::Os::Mac | editsync::Os::Linux => editsync::DownloadedFileType::GzipTar,
+                    editsync::Os::Mac | editsync::Os::Linux => {
+                        editsync::DownloadedFileType::GzipTar
+                    }
                     editsync::Os::Windows => editsync::DownloadedFileType::Zip,
                 },
             )

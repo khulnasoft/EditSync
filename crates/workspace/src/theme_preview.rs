@@ -95,7 +95,7 @@ impl Item for ThemePreview {
         cx: &mut ViewContext<Self>,
     ) -> Option<gpui::View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(Self::new))
     }

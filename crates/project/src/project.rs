@@ -118,7 +118,7 @@ pub trait ProjectItem {
         cx: &mut AppContext,
     ) -> Option<Task<Result<Model<Self>>>>
     where
-        Self: Sieditsync;
+        Self: Sized;
     fn entry_id(&self, cx: &AppContext) -> Option<ProjectEntryId>;
     fn project_path(&self, cx: &AppContext) -> Option<ProjectPath>;
     fn is_dirty(&self) -> bool;

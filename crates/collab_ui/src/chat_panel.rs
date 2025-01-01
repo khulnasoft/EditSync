@@ -1259,8 +1259,10 @@ mod tests {
         );
 
         // Note that the "'" was replaced with ’ due to smart punctuation.
-        let (body, ranges) =
-            marked_text_ranges("Here is a link «https://editsync.khulnasoft.com» to editsyncs website", false);
+        let (body, ranges) = marked_text_ranges(
+            "Here is a link «https://editsync.khulnasoft.com» to editsyncs website",
+            false,
+        );
         assert_eq!(message.text, body);
         assert_eq!(1, ranges.len());
         assert_eq!(
@@ -1284,7 +1286,8 @@ mod tests {
         let language_registry = Arc::new(LanguageRegistry::test(cx.background_executor().clone()));
         let message = channel::ChannelMessage {
             id: ChannelMessageId::Saved(0),
-            body: "**Here is a link https://editsync.khulnasoft.com to editsyncs website**".to_string(),
+            body: "**Here is a link https://editsync.khulnasoft.com to editsyncs website**"
+                .to_string(),
             timestamp: OffsetDateTime::now_utc(),
             sender: Arc::new(client::User {
                 github_login: "fgh".into(),

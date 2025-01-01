@@ -133,7 +133,10 @@ async fn test_channel_buffers(db: &Arc<Database>) {
     );
 
     // Ensure that get_channel_buffer_collaborators works
-    let editsync_collaborats = db.get_channel_buffer_collaborators(editsync_id).await.unwrap();
+    let editsync_collaborats = db
+        .get_channel_buffer_collaborators(editsync_id)
+        .await
+        .unwrap();
     assert_eq!(editsync_collaborats, &[a_id, b_id]);
 
     let left_buffer = db
@@ -151,7 +154,10 @@ async fn test_channel_buffers(db: &Arc<Database>) {
 
     db.leave_channel_buffers(connection_id_a).await.unwrap();
 
-    let editsync_collaborators = db.get_channel_buffer_collaborators(editsync_id).await.unwrap();
+    let editsync_collaborators = db
+        .get_channel_buffer_collaborators(editsync_id)
+        .await
+        .unwrap();
     let cargo_collaborators = db.get_channel_buffer_collaborators(cargo_id).await.unwrap();
     assert_eq!(editsync_collaborators, &[]);
     assert_eq!(cargo_collaborators, &[]);

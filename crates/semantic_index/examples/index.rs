@@ -29,7 +29,8 @@ fn main() {
 
         let http = Arc::new(HttpClientWithUrl::new(
             Arc::new(
-                reqwest_client::ReqwestClient::user_agent("Editsync semantic index example").unwrap(),
+                reqwest_client::ReqwestClient::user_agent("Editsync semantic index example")
+                    .unwrap(),
             ),
             "http://localhost:11434",
             None,

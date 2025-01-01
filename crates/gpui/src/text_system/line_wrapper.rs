@@ -248,7 +248,10 @@ mod tests {
             .unwrap()
             .into()])
             .unwrap();
-        let id = cx.text_system().font_id(&font("Editsync Plex Mono")).unwrap();
+        let id = cx
+            .text_system()
+            .font_id(&font("Editsync Plex Mono"))
+            .unwrap();
         LineWrapper::new(id, px(16.), cx.text_system().platform_text_system.clone())
     }
 

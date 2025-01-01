@@ -7,7 +7,7 @@ pub trait Refineable: Clone {
     fn refined(self, refinement: Self::Refinement) -> Self;
     fn from_cascade(cascade: &Cascade<Self>) -> Self
     where
-        Self: Default + Sieditsync,
+        Self: Default + Sized,
     {
         Self::default().refined(cascade.merged())
     }

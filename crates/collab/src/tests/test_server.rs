@@ -1,7 +1,7 @@
 use crate::{
     db::{tests::TestDb, NewUserParams, UserId},
     executor::Executor,
-    rpc::{Principal, Server, EditsyncVersion, CLEANUP_TIMEOUT, RECONNECT_TIMEOUT},
+    rpc::{EditsyncVersion, Principal, Server, CLEANUP_TIMEOUT, RECONNECT_TIMEOUT},
     AppState, Config, RateLimiter,
 };
 use anyhow::anyhow;

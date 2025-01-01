@@ -350,7 +350,8 @@ impl QuickActionBar {
         language: &str,
         cx: &mut ViewContext<Self>,
     ) -> Option<AnyElement> {
-        let tooltip: SharedString = SharedString::from(format!("Setup Editsync REPL for {}", language));
+        let tooltip: SharedString =
+            SharedString::from(format!("Setup Editsync REPL for {}", language));
         Some(
             h_flex()
                 .gap(DynamicSpacing::Base06.rems(cx))

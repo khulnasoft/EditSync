@@ -6,7 +6,7 @@ use client::{
     MAX_LLM_MONTHLY_SPEND_REACHED_HEADER_NAME,
 };
 use collections::BTreeMap;
-use feature_flags::{FeatureFlagAppExt, LlmClosedBeta, EditsyncPro};
+use feature_flags::{EditsyncPro, FeatureFlagAppExt, LlmClosedBeta};
 use futures::{
     future::BoxFuture, stream::BoxStream, AsyncBufReadExt, FutureExt, Stream, StreamExt,
     TryStreamExt as _,
@@ -485,7 +485,11 @@ impl CloudLanguageModel {
             let request_builder = http_client::Request::builder();
             let request = request_builder
                 .method(Method::POST)
-                .uri(http_client.build_editsync_llm_url("/completion", &[])?.as_ref())
+                .uri(
+                    http_client
+                        .build_editsync_llm_url("/completion", &[])?
+                        .as_ref(),
+                )
                 .header("Content-Type", "application/json")
                 .header("Authorization", format!("Bearer {token}"))
                 .body(serde_json::to_string(&body)?.into())?;
@@ -909,7 +913,9 @@ impl Render for ConfigurationView {
                 h_flex().child(
                     Button::new("manage_settings", "Manage Subscription")
                         .style(ButtonStyle::Tinted(TintColor::Accent))
-                        .on_click(cx.listener(|_, _, cx| cx.open_url(&editsync_urls::account_url(cx)))),
+                        .on_click(
+                            cx.listener(|_, _, cx| cx.open_url(&editsync_urls::account_url(cx))),
+                        ),
                 ),
             )
         } else if cx.has_flag::<EditsyncPro>() {
@@ -926,7 +932,9 @@ impl Render for ConfigurationView {
                             .style(ButtonStyle::Subtle)
                             .color(Color::Accent)
                             .on_click(
-                                cx.listener(|_, _, cx| cx.open_url(&editsync_urls::account_url(cx))),
+                                cx.listener(|_, _, cx| {
+                                    cx.open_url(&editsync_urls::account_url(cx))
+                                }),
                             ),
                     ),
             )
@@ -946,7 +954,9 @@ impl Render for ConfigurationView {
         } else {
             v_flex()
                 .gap_2()
-                .child(Label::new("Use Editsync AI to access hosted language models."))
+                .child(Label::new(
+                    "Use Editsync AI to access hosted language models.",
+                ))
                 .child(
                     Button::new("sign_in", "Sign In")
                         .icon_color(Color::Muted)

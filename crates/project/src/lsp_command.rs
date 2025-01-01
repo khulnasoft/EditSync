@@ -46,7 +46,7 @@ pub fn lsp_formatting_options(settings: &LanguageSettings) -> lsp::FormattingOpt
 }
 
 #[async_trait(?Send)]
-pub trait LspCommand: 'static + Sieditsync + Send + std::fmt::Debug {
+pub trait LspCommand: 'static + Sized + Send + std::fmt::Debug {
     type Response: 'static + Default + Send + std::fmt::Debug;
     type LspRequest: 'static + Send + lsp::request::Request;
     type ProtoRequest: 'static + Send + proto::RequestMessage;

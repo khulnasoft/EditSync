@@ -9,6 +9,7 @@ use bitflags::bitflags;
 use client::Client;
 use db::kvp::KEY_VALUE_STORE;
 use editor::{Editor, EditorEvent};
+use editsync_actions::feedback::GiveFeedback;
 use futures::AsyncReadExt;
 use gpui::{
     div, rems, AppContext, DismissEvent, EventEmitter, FocusHandle, FocusableView, Model,
@@ -22,7 +23,6 @@ use serde_derive::Serialize;
 use ui::{prelude::*, Button, ButtonStyle, IconPosition, Tooltip};
 use util::ResultExt;
 use workspace::{DismissDecision, ModalView, Workspace};
-use editsync_actions::feedback::GiveFeedback;
 
 use crate::{system_specs::SystemSpecs, OpenEditsyncRepo};
 
@@ -415,7 +415,8 @@ impl Render for FeedbackModal {
             "Submit"
         };
 
-        let open_editsync_repo = cx.listener(|_, _, cx| cx.dispatch_action(Box::new(OpenEditsyncRepo)));
+        let open_editsync_repo =
+            cx.listener(|_, _, cx| cx.dispatch_action(Box::new(OpenEditsyncRepo)));
 
         v_flex()
             .elevation_3(cx)

@@ -30,7 +30,10 @@ async fn test_channels(db: &Arc<Database>) {
         .await
         .unwrap();
 
-    let crdb_id = db.create_sub_channel("crdb", editsync_id, a_id).await.unwrap();
+    let crdb_id = db
+        .create_sub_channel("crdb", editsync_id, a_id)
+        .await
+        .unwrap();
     let livestreaming_id = db
         .create_sub_channel("livestreaming", editsync_id, a_id)
         .await
@@ -330,9 +333,15 @@ async fn test_db_channel_moving(db: &Arc<Database>) {
 
     let editsync_id = db.create_root_channel("editsync", a_id).await.unwrap();
 
-    let crdb_id = db.create_sub_channel("crdb", editsync_id, a_id).await.unwrap();
+    let crdb_id = db
+        .create_sub_channel("crdb", editsync_id, a_id)
+        .await
+        .unwrap();
 
-    let gpui2_id = db.create_sub_channel("gpui2", editsync_id, a_id).await.unwrap();
+    let gpui2_id = db
+        .create_sub_channel("gpui2", editsync_id, a_id)
+        .await
+        .unwrap();
 
     let livestreaming_id = db
         .create_sub_channel("livestreaming", crdb_id, a_id)
@@ -356,7 +365,10 @@ async fn test_db_channel_moving(db: &Arc<Database>) {
             (editsync_id, &[]),
             (crdb_id, &[editsync_id]),
             (livestreaming_id, &[editsync_id, crdb_id]),
-            (livestreaming_dag_id, &[editsync_id, crdb_id, livestreaming_id]),
+            (
+                livestreaming_dag_id,
+                &[editsync_id, crdb_id, livestreaming_id],
+            ),
             (gpui2_id, &[editsync_id]),
         ],
     );
@@ -440,9 +452,13 @@ async fn test_user_is_channel_participant(db: &Arc<Database>) {
         .await
         .unwrap();
 
-    db.set_channel_visibility(editsync_channel, crate::db::ChannelVisibility::Public, admin)
-        .await
-        .unwrap();
+    db.set_channel_visibility(
+        editsync_channel,
+        crate::db::ChannelVisibility::Public,
+        admin,
+    )
+    .await
+    .unwrap();
     db.set_channel_visibility(
         public_channel_id,
         crate::db::ChannelVisibility::Public,
@@ -528,7 +544,10 @@ async fn test_user_is_channel_participant(db: &Arc<Database>) {
     let channels = db.get_channels_for_user(guest).await.unwrap().channels;
     assert_channel_tree(
         channels,
-        &[(editsync_channel, &[]), (public_channel_id, &[editsync_channel])],
+        &[
+            (editsync_channel, &[]),
+            (public_channel_id, &[editsync_channel]),
+        ],
     );
     let channels = db.get_channels_for_user(member).await.unwrap().channels;
     assert_channel_tree(
@@ -628,7 +647,9 @@ async fn test_user_is_channel_participant(db: &Arc<Database>) {
 
     db.transaction(|tx| async move {
         db.check_user_is_channel_participant(
-            &db.get_channel_internal(editsync_channel, &tx).await.unwrap(),
+            &db.get_channel_internal(editsync_channel, &tx)
+                .await
+                .unwrap(),
             guest,
             &tx,
         )
@@ -694,7 +715,10 @@ async fn test_user_is_channel_participant(db: &Arc<Database>) {
     let channels = db.get_channels_for_user(guest).await.unwrap().channels;
     assert_channel_tree(
         channels,
-        &[(editsync_channel, &[]), (public_channel_id, &[editsync_channel])],
+        &[
+            (editsync_channel, &[]),
+            (public_channel_id, &[editsync_channel]),
+        ],
     )
 }
 
@@ -712,9 +736,13 @@ async fn test_guest_access(db: &Arc<Database>) {
     let guest_connection = new_test_connection(server);
 
     let editsync_channel = db.create_root_channel("editsync", admin).await.unwrap();
-    db.set_channel_visibility(editsync_channel, crate::db::ChannelVisibility::Public, admin)
-        .await
-        .unwrap();
+    db.set_channel_visibility(
+        editsync_channel,
+        crate::db::ChannelVisibility::Public,
+        admin,
+    )
+    .await
+    .unwrap();
 
     assert!(db
         .join_channel_chat(editsync_channel, guest_connection, guest)

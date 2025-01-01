@@ -1,5 +1,7 @@
+use editsync_extension_api::{
+    self as editsync, serde_json, settings::LspSettings, LanguageServerId, Result,
+};
 use std::fs;
-use editsync_extension_api::{self as editsync, serde_json, settings::LspSettings, LanguageServerId, Result};
 
 struct ZigExtension {
     cached_binary_path: Option<String>,
@@ -108,7 +110,9 @@ impl ZigExtension {
                 &download_url,
                 &version_dir,
                 match platform {
-                    editsync::Os::Mac | editsync::Os::Linux => editsync::DownloadedFileType::GzipTar,
+                    editsync::Os::Mac | editsync::Os::Linux => {
+                        editsync::DownloadedFileType::GzipTar
+                    }
                     editsync::Os::Windows => editsync::DownloadedFileType::Zip,
                 },
             )

@@ -407,7 +407,8 @@ pub fn monitor_main_thread_hangs(
                         continue;
                     };
 
-                    let Ok(url) = http_client.build_editsync_api_url("/telemetry/hangs", &[]) else {
+                    let Ok(url) = http_client.build_editsync_api_url("/telemetry/hangs", &[])
+                    else {
                         continue;
                     };
 

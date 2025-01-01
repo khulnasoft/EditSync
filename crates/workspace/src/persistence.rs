@@ -22,8 +22,8 @@ use uuid::Uuid;
 use crate::WorkspaceId;
 
 use model::{
-    GroupId, LocalPaths, PaneId, SerialieditsyncItem, SerialieditsyncPane, SerialieditsyncPaneGroup,
-    SerialieditsyncSshProject, SerialieditsyncWorkspace,
+    GroupId, LocalPaths, PaneId, SerialieditsyncItem, SerialieditsyncPane,
+    SerialieditsyncPaneGroup, SerialieditsyncSshProject, SerialieditsyncWorkspace,
 };
 
 use self::model::{DockStructure, LocalPathsOrder, SerialieditsyncWorkspaceLocation};
@@ -87,8 +87,8 @@ impl Bind for SerialieditsyncWindowBounds {
                     next_index,
                 )
             }
-            WindowBounds::Maximieditsync(bounds) => {
-                let next_index = statement.bind(&"Maximieditsync", start_index)?;
+            WindowBounds::Maximized(bounds) => {
+                let next_index = statement.bind(&"Maximized", start_index)?;
                 statement.bind(
                     &(
                         SerialieditsyncPixels(bounds.origin.x),
@@ -127,7 +127,7 @@ impl Column for SerialieditsyncWindowBounds {
 
         let status = match window_state.as_str() {
             "Windowed" | "Fixed" => SerialieditsyncWindowBounds(WindowBounds::Windowed(bounds)),
-            "Maximieditsync" => SerialieditsyncWindowBounds(WindowBounds::Maximieditsync(bounds)),
+            "Maximized" => SerialieditsyncWindowBounds(WindowBounds::Maximized(bounds)),
             "FullScreen" => SerialieditsyncWindowBounds(WindowBounds::Fullscreen(bounds)),
             _ => bail!("Window State did not have a valid string"),
         };
@@ -738,8 +738,8 @@ impl WorkspaceDb {
     pub(crate) fn last_window(
         &self,
     ) -> anyhow::Result<(Option<Uuid>, Option<SerialieditsyncWindowBounds>)> {
-        let mut prepared_query =
-            self.select::<(Option<Uuid>, Option<SerialieditsyncWindowBounds>)>(sql!(
+        let mut prepared_query = self
+            .select::<(Option<Uuid>, Option<SerialieditsyncWindowBounds>)>(sql!(
                 SELECT
                 display,
                 window_state, window_x, window_y, window_width, window_height
@@ -790,7 +790,10 @@ impl WorkspaceDb {
         for (id, location, order, ssh_project_id) in self.recent_workspaces()? {
             if let Some(ssh_project_id) = ssh_project_id.map(SshProjectId) {
                 if let Some(ssh_project) = ssh_projects.iter().find(|rp| rp.id == ssh_project_id) {
-                    result.push((id, SerialieditsyncWorkspaceLocation::Ssh(ssh_project.clone())));
+                    result.push((
+                        id,
+                        SerialieditsyncWorkspaceLocation::Ssh(ssh_project.clone()),
+                    ));
                 } else {
                     delete_tasks.push(self.delete_workspace_by_id(id));
                 }
@@ -834,7 +837,8 @@ impl WorkspaceDb {
             self.session_workspaces(last_session_id.to_owned())?
         {
             if let Some(ssh_project_id) = ssh_project_id {
-                let location = SerialieditsyncWorkspaceLocation::Ssh(self.ssh_project(ssh_project_id)?);
+                let location =
+                    SerialieditsyncWorkspaceLocation::Ssh(self.ssh_project(ssh_project_id)?);
                 workspaces.push((location, window_id.map(WindowId::from)));
             } else if location.paths().iter().all(|path| path.exists())
                 && location.paths().iter().any(|path| path.is_dir())
@@ -1158,7 +1162,9 @@ impl WorkspaceDb {
 mod tests {
     use super::*;
     use crate::persistence::model::SerialieditsyncWorkspace;
-    use crate::persistence::model::{SerialieditsyncItem, SerialieditsyncPane, SerialieditsyncPaneGroup};
+    use crate::persistence::model::{
+        SerialieditsyncItem, SerialieditsyncPane, SerialieditsyncPaneGroup,
+    };
     use db::open_test_db;
     use gpui::{self};
 
@@ -1274,7 +1280,8 @@ mod tests {
         })
         .await;
 
-        workspace_1.location = SerialieditsyncWorkspaceLocation::from_local_paths(["/tmp", "/tmp3"]);
+        workspace_1.location =
+            SerialieditsyncWorkspaceLocation::from_local_paths(["/tmp", "/tmp3"]);
         db.save_workspace(workspace_1.clone()).await;
         db.save_workspace(workspace_1).await;
         db.save_workspace(workspace_2).await;
@@ -1427,7 +1434,8 @@ mod tests {
         assert_eq!(db.workspace_for_roots(&["/tmp3", "/tmp2", "/tmp4"]), None);
 
         // Test 'mutate' case of updating a pre-existing id
-        workspace_2.location = SerialieditsyncWorkspaceLocation::from_local_paths(["/tmp", "/tmp2"]);
+        workspace_2.location =
+            SerialieditsyncWorkspaceLocation::from_local_paths(["/tmp", "/tmp2"]);
 
         db.save_workspace(workspace_2.clone()).await;
         assert_eq!(
@@ -1638,20 +1646,22 @@ mod tests {
             ),
         ]
         .into_iter()
-        .map(|(id, locations, order, window_id)| SerialieditsyncWorkspace {
-            id: WorkspaceId(id),
-            location: SerialieditsyncWorkspaceLocation::Local(
-                LocalPaths::new(locations),
-                LocalPathsOrder::new(order),
-            ),
-            center_group: Default::default(),
-            window_bounds: Default::default(),
-            display: Default::default(),
-            docks: Default::default(),
-            centered_layout: false,
-            session_id: Some("one-session".to_owned()),
-            window_id: Some(window_id),
-        })
+        .map(
+            |(id, locations, order, window_id)| SerialieditsyncWorkspace {
+                id: WorkspaceId(id),
+                location: SerialieditsyncWorkspaceLocation::Local(
+                    LocalPaths::new(locations),
+                    LocalPathsOrder::new(order),
+                ),
+                center_group: Default::default(),
+                window_bounds: Default::default(),
+                display: Default::default(),
+                docks: Default::default(),
+                centered_layout: false,
+                session_id: Some("one-session".to_owned()),
+                window_id: Some(window_id),
+            },
+        )
         .collect::<Vec<_>>();
 
         for workspace in workspaces.iter() {

@@ -937,7 +937,9 @@ fn handle_hit_test_msg(
         y: lparam.signed_hiword().into(),
     };
     unsafe { ScreenToClient(handle, &mut cursor_point).ok().log_err() };
-    if !state_ptr.state.borrow().is_maximieditsync() && cursor_point.y >= 0 && cursor_point.y <= frame_y
+    if !state_ptr.state.borrow().is_maximieditsync()
+        && cursor_point.y >= 0
+        && cursor_point.y <= frame_y
     {
         return Some(HTTOP as _);
     }

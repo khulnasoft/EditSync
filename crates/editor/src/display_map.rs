@@ -1285,7 +1285,7 @@ impl DisplaySnapshot {
     }
 
     #[cfg(any(test, feature = "test-support"))]
-    pub fn text_highlight_ranges<Tag: ?Sieditsync + 'static>(
+    pub fn text_highlight_ranges<Tag: ?Sized + 'static>(
         &self,
     ) -> Option<Arc<(HighlightStyle, Vec<Range<Anchor>>)>> {
         let type_id = TypeId::of::<Tag>();
@@ -1294,7 +1294,7 @@ impl DisplaySnapshot {
 
     #[allow(unused)]
     #[cfg(any(test, feature = "test-support"))]
-    pub(crate) fn inlay_highlights<Tag: ?Sieditsync + 'static>(
+    pub(crate) fn inlay_highlights<Tag: ?Sized + 'static>(
         &self,
     ) -> Option<&TreeMap<InlayId, (HighlightStyle, InlayHighlight)>> {
         let type_id = TypeId::of::<Tag>();

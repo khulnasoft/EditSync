@@ -663,8 +663,9 @@ mod test {
 
         let project = Project::test(fs, ["/editsync".as_ref()], cx).await;
 
-        let result =
-            cx.update(|cx| collect_files(project.clone(), &["editsync/assets/themes".to_string()], cx));
+        let result = cx.update(|cx| {
+            collect_files(project.clone(), &["editsync/assets/themes".to_string()], cx)
+        });
         let result = SlashCommandOutput::from_event_stream(result.boxed())
             .await
             .unwrap();
@@ -674,9 +675,13 @@ mod test {
         assert_eq!(result.sections.len(), 7);
 
         // Ensure that full file paths are included in the real output
-        assert!(result.text.contains("editsync/assets/themes/andromeda/LICENSE"));
+        assert!(result
+            .text
+            .contains("editsync/assets/themes/andromeda/LICENSE"));
         assert!(result.text.contains("editsync/assets/themes/ayu/LICENSE"));
-        assert!(result.text.contains("editsync/assets/themes/summercamp/LICENSE"));
+        assert!(result
+            .text
+            .contains("editsync/assets/themes/summercamp/LICENSE"));
 
         assert_eq!(result.sections[5].label, "summercamp");
 
@@ -686,7 +691,10 @@ mod test {
             "editsync/assets/themes/andromeda/LICENSE"
         );
         assert_eq!(result.sections[1].label, "andromeda");
-        assert_eq!(result.sections[2].label, "editsync/assets/themes/ayu/LICENSE");
+        assert_eq!(
+            result.sections[2].label,
+            "editsync/assets/themes/ayu/LICENSE"
+        );
         assert_eq!(result.sections[3].label, "ayu");
         assert_eq!(
             result.sections[4].label,
@@ -725,8 +733,9 @@ mod test {
 
         let project = Project::test(fs, ["/editsync".as_ref()], cx).await;
 
-        let result =
-            cx.update(|cx| collect_files(project.clone(), &["editsync/assets/themes".to_string()], cx));
+        let result = cx.update(|cx| {
+            collect_files(project.clone(), &["editsync/assets/themes".to_string()], cx)
+        });
         let result = SlashCommandOutput::from_event_stream(result.boxed())
             .await
             .unwrap();

@@ -7797,7 +7797,9 @@ impl LspStore {
             .end
             .ok_or_else(|| anyhow!("invalid end"))?;
         Ok(CoreSymbol {
-            language_server_name: LanguageServerName(serialieditsync_symbol.language_server_name.into()),
+            language_server_name: LanguageServerName(
+                serialieditsync_symbol.language_server_name.into(),
+            ),
             source_worktree_id,
             path,
             name: serialieditsync_symbol.name,

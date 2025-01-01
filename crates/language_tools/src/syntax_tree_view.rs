@@ -396,7 +396,7 @@ impl Item for SyntaxTreeView {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| {
             let mut clone = Self::new(self.workspace_handle.clone(), None, cx);

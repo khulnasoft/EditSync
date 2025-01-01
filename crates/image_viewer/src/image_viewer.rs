@@ -150,7 +150,7 @@ impl Item for ImageView {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| Self {
             image_item: self.image_item.clone(),
@@ -332,7 +332,7 @@ impl ProjectItem for ImageView {
         cx: &mut ViewContext<Self>,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Self::new(item, project, cx)
     }

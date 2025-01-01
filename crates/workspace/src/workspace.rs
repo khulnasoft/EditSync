@@ -101,7 +101,9 @@ pub use workspace_settings::{
 
 use crate::notifications::NotificationId;
 use crate::persistence::{
-    model::{DockData, DockStructure, SerialieditsyncItem, SerialieditsyncPane, SerialieditsyncPaneGroup},
+    model::{
+        DockData, DockStructure, SerialieditsyncItem, SerialieditsyncPane, SerialieditsyncPaneGroup,
+    },
     SerialieditsyncAxis,
 };
 
@@ -1170,11 +1172,12 @@ impl Workspace {
                 }
             }
 
-            let workspace_id = if let Some(serialieditsync_workspace) = serialieditsync_workspace.as_ref() {
-                serialieditsync_workspace.id
-            } else {
-                DB.next_id().await.unwrap_or_else(|_| Default::default())
-            };
+            let workspace_id =
+                if let Some(serialieditsync_workspace) = serialieditsync_workspace.as_ref() {
+                    serialieditsync_workspace.id
+                } else {
+                    DB.next_id().await.unwrap_or_else(|_| Default::default())
+                };
 
             let toolchains = DB.toolchains(workspace_id).await?;
             for (toolchain, worktree_id) in toolchains {
@@ -1210,8 +1213,13 @@ impl Workspace {
                             Some((display?, window_bounds?))
                         });
 
-                    if let Some((serialieditsync_display, serialieditsync_status)) = restorable_bounds {
-                        (Some(serialieditsync_status.0), Some(serialieditsync_display))
+                    if let Some((serialieditsync_display, serialieditsync_status)) =
+                        restorable_bounds
+                    {
+                        (
+                            Some(serialieditsync_status.0),
+                            Some(serialieditsync_display),
+                        )
                     } else {
                         (None, None)
                     }
@@ -1531,7 +1539,10 @@ impl Workspace {
         self.serialieditsync_ssh_project.clone()
     }
 
-    pub fn set_serialieditsync_ssh_project(&mut self, serialieditsync_ssh_project: SerialieditsyncSshProject) {
+    pub fn set_serialieditsync_ssh_project(
+        &mut self,
+        serialieditsync_ssh_project: SerialieditsyncSshProject,
+    ) {
         self.serialieditsync_ssh_project = Some(serialieditsync_ssh_project);
     }
 
@@ -4138,7 +4149,10 @@ impl Workspace {
             return Task::ready(());
         };
 
-        fn serialize_pane_handle(pane_handle: &View<Pane>, cx: &WindowContext) -> SerialieditsyncPane {
+        fn serialize_pane_handle(
+            pane_handle: &View<Pane>,
+            cx: &WindowContext,
+        ) -> SerialieditsyncPane {
             let (items, active, pinned_count) = {
                 let pane = pane_handle.read(cx);
                 let active_item_id = pane.active_item().map(|item| item.item_id());
@@ -4241,7 +4255,9 @@ impl Workspace {
             Some(SerialieditsyncWorkspaceLocation::Ssh(ssh_project.clone()))
         } else if let Some(local_paths) = self.local_paths(cx) {
             if !local_paths.is_empty() {
-                Some(SerialieditsyncWorkspaceLocation::from_local_paths(local_paths))
+                Some(SerialieditsyncWorkspaceLocation::from_local_paths(
+                    local_paths,
+                ))
             } else {
                 None
             }
@@ -5766,15 +5782,20 @@ fn serialize_ssh_project(
         let serialieditsync_workspace =
             persistence::DB.workspace_for_ssh_project(&serialieditsync_ssh_project);
 
-        let workspace_id = if let Some(workspace_id) =
-            serialieditsync_workspace.as_ref().map(|workspace| workspace.id)
+        let workspace_id = if let Some(workspace_id) = serialieditsync_workspace
+            .as_ref()
+            .map(|workspace| workspace.id)
         {
             workspace_id
         } else {
             persistence::DB.next_id().await?
         };
 
-        Ok((serialieditsync_ssh_project, workspace_id, serialieditsync_workspace))
+        Ok((
+            serialieditsync_ssh_project,
+            workspace_id,
+            serialieditsync_workspace,
+        ))
     })
 }
 
@@ -7976,7 +7997,7 @@ mod tests {
                 cx: &mut ViewContext<Self>,
             ) -> Self
             where
-                Self: Sieditsync,
+                Self: Sized,
             {
                 Self {
                     focus_handle: cx.focus_handle(),
@@ -8042,7 +8063,7 @@ mod tests {
                 cx: &mut ViewContext<Self>,
             ) -> Self
             where
-                Self: Sieditsync,
+                Self: Sized,
             {
                 Self {
                     focus_handle: cx.focus_handle(),
@@ -8080,7 +8101,7 @@ mod tests {
                 cx: &mut ViewContext<Self>,
             ) -> Self
             where
-                Self: Sieditsync,
+                Self: Sized,
             {
                 Self {
                     focus_handle: cx.focus_handle(),

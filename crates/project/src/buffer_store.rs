@@ -2325,7 +2325,11 @@ impl BufferChangeSet {
                 if base_text_changed {
                     this.base_text_version += 1;
                     this.base_text = Some(cx.new_model(|cx| {
-                        Buffer::local_normalieditsync(Rope::from(base_text), LineEnding::default(), cx)
+                        Buffer::local_normalieditsync(
+                            Rope::from(base_text),
+                            LineEnding::default(),
+                            cx,
+                        )
                     }));
                 }
                 this.diff_to_buffer = diff;

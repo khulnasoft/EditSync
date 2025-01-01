@@ -143,7 +143,9 @@ impl TryFrom<VsCodeTaskFile> for TaskTemplates {
         let templates = value
             .tasks
             .into_iter()
-            .filter_map(|vscode_definition| vscode_definition.into_editsync_format(&replacer).log_err())
+            .filter_map(|vscode_definition| {
+                vscode_definition.into_editsync_format(&replacer).log_err()
+            })
             .collect();
         Ok(Self(templates))
     }

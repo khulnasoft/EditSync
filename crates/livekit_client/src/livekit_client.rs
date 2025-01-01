@@ -522,7 +522,7 @@ fn video_frame_buffer_to_webrtc(_frame: ScreenCaptureFrame) -> Option<impl AsRef
     None as Option<Box<dyn VideoBuffer>>
 }
 
-trait DeviceChangeListenerApi: Stream<Item = ()> + Sieditsync {
+trait DeviceChangeListenerApi: Stream<Item = ()> + Sized {
     fn new(input: bool) -> Result<Self>;
 }
 

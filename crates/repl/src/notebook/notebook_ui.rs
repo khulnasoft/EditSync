@@ -642,7 +642,7 @@ impl Item for NotebookEditor {
         cx: &mut ViewContext<Self>,
     ) -> Option<gpui::View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| Self::new(self.project.clone(), self.notebook_item.clone(), cx)))
     }
@@ -750,7 +750,7 @@ impl ProjectItem for NotebookEditor {
         cx: &mut ViewContext<Self>,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Self::new(project, item, cx)
     }

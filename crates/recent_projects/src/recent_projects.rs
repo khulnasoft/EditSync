@@ -4,6 +4,7 @@ mod ssh_connections;
 pub use ssh_connections::{is_connecting_over_ssh, open_ssh_project};
 
 use disconnected_overlay::DisconnectedOverlay;
+use editsync_actions::{OpenRecent, OpenRemote};
 use fuzzy::{StringMatch, StringMatchCandidate};
 use gpui::{
     Action, AnyElement, AppContext, DismissEvent, EventEmitter, FocusHandle, FocusableView,
@@ -28,7 +29,6 @@ use workspace::{
     CloseIntent, ModalView, OpenOptions, SerialieditsyncWorkspaceLocation, Workspace, WorkspaceId,
     WORKSPACE_DB,
 };
-use editsync_actions::{OpenRecent, OpenRemote};
 
 pub fn init(cx: &mut AppContext) {
     SshSettings::register(cx);
@@ -157,7 +157,10 @@ impl RecentProjectsDelegate {
         }
     }
 
-    pub fn set_workspaces(&mut self, workspaces: Vec<(WorkspaceId, SerialieditsyncWorkspaceLocation)>) {
+    pub fn set_workspaces(
+        &mut self,
+        workspaces: Vec<(WorkspaceId, SerialieditsyncWorkspaceLocation)>,
+    ) {
         self.workspaces = workspaces;
         self.has_any_non_local_projects = !self
             .workspaces
@@ -409,9 +412,11 @@ impl PickerDelegate for RecentProjectsDelegate {
                                         .color(Color::Muted)
                                         .into_any_element()
                                 }
-                                SerialieditsyncWorkspaceLocation::Ssh(_) => Icon::new(IconName::Server)
-                                    .color(Color::Muted)
-                                    .into_any_element(),
+                                SerialieditsyncWorkspaceLocation::Ssh(_) => {
+                                    Icon::new(IconName::Server)
+                                        .color(Color::Muted)
+                                        .into_any_element()
+                                }
                             })
                         })
                         .child({

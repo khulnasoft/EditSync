@@ -289,8 +289,11 @@ mod linux {
 
     use crate::{Detect, InstalledApp};
 
-    static RELEASE_CHANNEL: LazyLock<String> =
-        LazyLock::new(|| include_str!("../../editsync/RELEASE_CHANNEL").trim().to_string());
+    static RELEASE_CHANNEL: LazyLock<String> = LazyLock::new(|| {
+        include_str!("../../editsync/RELEASE_CHANNEL")
+            .trim()
+            .to_string()
+    });
 
     struct App(PathBuf);
 
@@ -306,8 +309,11 @@ mod linux {
 
                 // libexec is the standard, lib/editsync is for Arch (and other non-libexec distros),
                 // ./editsync is for the target directory in development builds.
-                let possible_locations =
-                    ["../libexec/editsync-editor", "../lib/editsync/editsync-editor", "./editsync"];
+                let possible_locations = [
+                    "../libexec/editsync-editor",
+                    "../lib/editsync/editsync-editor",
+                    "./editsync",
+                ];
                 possible_locations
                     .iter()
                     .find_map(|p| dir.join(p).canonicalize().ok().filter(|path| path != &cli))
@@ -335,7 +341,8 @@ mod linux {
         }
 
         fn launch(&self, ipc_url: String) -> anyhow::Result<()> {
-            let sock_path = paths::support_dir().join(format!("editsync-{}.sock", *RELEASE_CHANNEL));
+            let sock_path =
+                paths::support_dir().join(format!("editsync-{}.sock", *RELEASE_CHANNEL));
             let sock = UnixDatagram::unbound()?;
             if sock.connect(&sock_path).is_err() {
                 self.boot_background(ipc_url)?;
@@ -423,7 +430,9 @@ mod flatpak {
         if let Some(flatpak_dir) = get_flatpak_dir() {
             let mut args = vec!["/usr/bin/flatpak-spawn".into(), "--host".into()];
             args.append(&mut get_xdg_env_args());
-            args.push("--env=EDITSYNC_UPDATE_EXPLANATION=Please use flatpak to update editsync".into());
+            args.push(
+                "--env=EDITSYNC_UPDATE_EXPLANATION=Please use flatpak to update editsync".into(),
+            );
             args.push(
                 format!(
                     "--env={EXTRA_LIB_ENV_NAME}={}",
@@ -456,7 +465,10 @@ mod flatpak {
         {
             if args.editsync.is_none() {
                 args.editsync = Some("/app/libexec/editsync-editor".into());
-                env::set_var("EDITSYNC_UPDATE_EXPLANATION", "Please use flatpak to update editsync");
+                env::set_var(
+                    "EDITSYNC_UPDATE_EXPLANATION",
+                    "Please use flatpak to update editsync",
+                );
             }
         }
         args

@@ -957,7 +957,7 @@ pub enum WindowBounds {
     Windowed(Bounds<Pixels>),
     /// Indicates that the window should open in a maximieditsync state.
     /// The bounds provided here represent the restore size of the window.
-    Maximieditsync(Bounds<Pixels>),
+    Maximized(Bounds<Pixels>),
     /// Indicates that the window should open in fullscreen mode.
     /// The bounds provided here represent the restore size of the window.
     Fullscreen(Bounds<Pixels>),
@@ -974,7 +974,7 @@ impl WindowBounds {
     pub fn get_bounds(&self) -> Bounds<Pixels> {
         match self {
             WindowBounds::Windowed(bounds) => *bounds,
-            WindowBounds::Maximieditsync(bounds) => *bounds,
+            WindowBounds::Maximized(bounds) => *bounds,
             WindowBounds::Fullscreen(bounds) => *bounds,
         }
     }

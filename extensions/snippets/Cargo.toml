@@ -13,5 +13,5 @@ path = "src/snippets.rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-editsync_extension_api = "0.1.0"
+editsync_extension_api = "0.2.0"
 serde_json = "1.0"

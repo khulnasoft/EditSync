@@ -586,7 +586,7 @@ mod tests {
 
         fn debug_name() -> &'static str
         where
-            Self: ::std::marker::Sieditsync,
+            Self: ::std::marker::Sized,
         {
             "test::TestAction"
         }
@@ -608,7 +608,7 @@ mod tests {
 
         fn build(_value: serde_json::Value) -> anyhow::Result<Box<dyn Action>>
         where
-            Self: Sieditsync,
+            Self: Sized,
         {
             Ok(Box::new(TestAction))
         }

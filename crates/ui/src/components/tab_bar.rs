@@ -36,7 +36,7 @@ impl TabBar {
 
     pub fn start_child(mut self, start_child: impl IntoElement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.start_children_mut()
             .push(start_child.into_element().into_any());
@@ -48,7 +48,7 @@ impl TabBar {
         start_children: impl IntoIterator<Item = impl IntoElement>,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.start_children_mut().extend(
             start_children
@@ -64,7 +64,7 @@ impl TabBar {
 
     pub fn end_child(mut self, end_child: impl IntoElement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.end_children_mut()
             .push(end_child.into_element().into_any());
@@ -73,7 +73,7 @@ impl TabBar {
 
     pub fn end_children(mut self, end_children: impl IntoIterator<Item = impl IntoElement>) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.end_children_mut().extend(
             end_children

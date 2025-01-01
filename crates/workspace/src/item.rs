@@ -242,7 +242,7 @@ pub trait Item: FocusableView + EventEmitter<Self::Event> {
         _: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         None
     }
@@ -920,7 +920,7 @@ pub trait ProjectItem: Item {
         cx: &mut ViewContext<Self>,
     ) -> Self
     where
-        Self: Sieditsync;
+        Self: Sized;
 }
 
 #[derive(Debug)]
@@ -1282,7 +1282,7 @@ pub mod test {
             cx: &mut ViewContext<Self>,
         ) -> Option<View<Self>>
         where
-            Self: Sieditsync,
+            Self: Sized,
         {
             Some(cx.new_view(|cx| Self {
                 state: self.state.clone(),

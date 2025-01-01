@@ -23,7 +23,8 @@ mod test_server;
 
 use language::{tree_sitter_rust, Language, LanguageConfig, LanguageMatcher};
 pub use randomieditsync_test_helpers::{
-    run_randomieditsync_test, save_randomieditsync_test_plan, RandomieditsyncTest, TestError, UserTestPlan,
+    run_randomieditsync_test, save_randomieditsync_test_plan, RandomieditsyncTest, TestError,
+    UserTestPlan,
 };
 pub use test_server::{TestClient, TestServer};
 

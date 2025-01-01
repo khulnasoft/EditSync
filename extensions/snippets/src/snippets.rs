@@ -1,7 +1,7 @@
-use serde_json::json;
-use std::fs;
 use editsync::LanguageServerId;
 use editsync_extension_api::{self as editsync, settings::LspSettings, Result};
+use serde_json::json;
+use std::fs;
 
 struct SnippetExtension {
     cached_binary_path: Option<String>,

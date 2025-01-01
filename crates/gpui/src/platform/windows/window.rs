@@ -171,7 +171,7 @@ impl WindowsWindowState {
         if self.is_fullscreen() {
             WindowBounds::Fullscreen(self.fullscreen_restore_bounds)
         } else if maximieditsync {
-            WindowBounds::Maximieditsync(bounds)
+            WindowBounds::Maximized(bounds)
         } else {
             WindowBounds::Windowed(bounds)
         }
@@ -313,7 +313,7 @@ impl WindowsWindowStatePtr {
             return Ok(());
         };
         match open_status.state {
-            WindowOpenState::Maximieditsync => unsafe {
+            WindowOpenState::Maximized => unsafe {
                 SetWindowPlacement(self.hwnd, &open_status.placement)?;
                 ShowWindowAsync(self.hwnd, SW_MAXIMIZE).ok()?;
             },
@@ -710,7 +710,7 @@ impl PlatformWindow for WindowsWindow {
             if IsWindowVisible(self.0.hwnd).as_bool() {
                 ShowWindowAsync(self.0.hwnd, SW_MAXIMIZE).ok().log_err();
             } else if let Some(status) = self.0.state.borrow_mut().initial_placement.as_mut() {
-                status.state = WindowOpenState::Maximieditsync;
+                status.state = WindowOpenState::Maximized;
             }
         }
     }
@@ -1030,7 +1030,7 @@ struct WindowOpenStatus {
 }
 
 enum WindowOpenState {
-    Maximieditsync,
+    Maximized,
     Fullscreen,
     Windowed,
 }

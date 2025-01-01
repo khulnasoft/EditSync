@@ -359,7 +359,7 @@ impl<T: 'static> Entity<T> for Model<T> {
 
     fn upgrade_from(weak: &Self::Weak) -> Option<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(Model {
             any_model: weak.any_model.upgrade()?,

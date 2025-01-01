@@ -52,7 +52,7 @@ impl<V: 'static> Entity<V> for View<V> {
 
     fn upgrade_from(weak: &Self::Weak) -> Option<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         let model = weak.model.upgrade()?;
         Some(View { model })

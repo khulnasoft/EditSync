@@ -1,4 +1,5 @@
 use anyhow::{anyhow, Context, Result};
+use editsync_actions::branches::OpenRecent;
 use fuzzy::{StringMatch, StringMatchCandidate};
 use git::repository::Branch;
 use gpui::{
@@ -13,7 +14,6 @@ use ui::{prelude::*, HighlightedLabel, ListItem, ListItemSpacing};
 use util::ResultExt;
 use workspace::notifications::DetachAndPromptErr;
 use workspace::{ModalView, Workspace};
-use editsync_actions::branches::OpenRecent;
 
 pub fn init(cx: &mut AppContext) {
     cx.observe_new_views(|workspace: &mut Workspace, _| {

@@ -13,7 +13,7 @@ use taffy::style::{AlignContent, Display};
 
 /// A trait for elements that can be styled.
 /// Use this to opt-in to a utility CSS-like styling API.
-pub trait Styled: Sieditsync {
+pub trait Styled: Sized {
     /// Returns a reference to the style memory of this element.
     fn style(&mut self) -> &mut StyleRefinement;
 
@@ -317,7 +317,7 @@ pub trait Styled: Sieditsync {
     fn bg<F>(mut self, fill: F) -> Self
     where
         F: Into<Fill>,
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.style().background = Some(fill.into());
         self

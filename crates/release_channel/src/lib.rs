@@ -9,10 +9,15 @@ use gpui::{AppContext, Global, SemanticVersion};
 /// stable | dev | nightly | preview
 pub static RELEASE_CHANNEL_NAME: LazyLock<String> = LazyLock::new(|| {
     if cfg!(debug_assertions) {
-        env::var("EDITSYNC_RELEASE_CHANNEL")
-            .unwrap_or_else(|_| include_str!("../../editsync/RELEASE_CHANNEL").trim().to_string())
+        env::var("EDITSYNC_RELEASE_CHANNEL").unwrap_or_else(|_| {
+            include_str!("../../editsync/RELEASE_CHANNEL")
+                .trim()
+                .to_string()
+        })
     } else {
-        include_str!("../../editsync/RELEASE_CHANNEL").trim().to_string()
+        include_str!("../../editsync/RELEASE_CHANNEL")
+            .trim()
+            .to_string()
     }
 });
 

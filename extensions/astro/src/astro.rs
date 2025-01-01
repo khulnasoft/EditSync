@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 use std::{env, fs};
 
-use serde::Deserialize;
 use editsync_extension_api::{self as editsync, serde_json, Result};
+use serde::Deserialize;
 
 const SERVER_PATH: &str = "node_modules/@astrojs/language-server/bin/nodeServer.js";
 const PACKAGE_NAME: &str = "@astrojs/language-server";
@@ -104,7 +104,8 @@ impl AstroExtension {
 
         let installed_typescript_version =
             editsync::npm_package_installed_version(TYPESCRIPT_PACKAGE_NAME)?;
-        let latest_typescript_version = editsync::npm_package_latest_version(TYPESCRIPT_PACKAGE_NAME)?;
+        let latest_typescript_version =
+            editsync::npm_package_latest_version(TYPESCRIPT_PACKAGE_NAME)?;
 
         if installed_typescript_version.as_ref() != Some(&latest_typescript_version) {
             println!("installing {TYPESCRIPT_PACKAGE_NAME}@{latest_typescript_version}");

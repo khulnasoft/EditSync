@@ -1,8 +1,8 @@
-use std::fs;
 use editsync::lsp::CompletionKind;
 use editsync::{serde_json, CodeLabel, CodeLabelSpan, LanguageServerId};
 use editsync_extension_api::settings::LspSettings;
 use editsync_extension_api::{self as editsync, Result};
+use std::fs;
 
 struct DenoExtension {
     cached_binary_path: Option<String>,

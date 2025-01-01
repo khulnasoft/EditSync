@@ -19,6 +19,9 @@ use collections::VecDeque;
 use command_palette_hooks::CommandPaletteFilter;
 use editor::ProposedChangesEditorToolbar;
 use editor::{scroll::Autoscroll, Editor, MultiBuffer};
+use editsync_actions::{
+    OpenAccountSettings, OpenBrowser, OpenEditsyncUrl, OpenServerSettings, OpenSettings, Quit,
+};
 use feature_flags::FeatureFlagAppExt;
 use futures::{channel::mpsc, select_biased, StreamExt};
 use gpui::{
@@ -56,9 +59,6 @@ use workspace::{
     open_new, AppState, NewFile, NewWindow, OpenLog, Toast, Workspace, WorkspaceSettings,
 };
 use workspace::{notifications::DetachAndPromptErr, Pane};
-use editsync_actions::{
-    OpenAccountSettings, OpenBrowser, OpenServerSettings, OpenSettings, OpenEditsyncUrl, Quit,
-};
 
 actions!(
     editsync,
@@ -253,7 +253,9 @@ fn initialize_linux_file_watcher(cx: &mut ViewContext<Workspace>) {
         cx.spawn(|_, mut cx| async move {
             if prompt.await == Ok(0) {
                 cx.update(|cx| {
-                    cx.open_url("https://editsync.khulnasoft.com/docs/linux#could-not-start-inotify");
+                    cx.open_url(
+                        "https://editsync.khulnasoft.com/docs/linux#could-not-start-inotify",
+                    );
                     cx.quit();
                 })
                 .ok();
@@ -289,7 +291,9 @@ fn show_software_emulation_warning_if_needed(
         cx.spawn(|_, mut cx| async move {
             if prompt.await == Ok(1) {
                 cx.update(|cx| {
-                    cx.open_url("https://editsync.khulnasoft.com/docs/linux#editsync-fails-to-open-windows");
+                    cx.open_url(
+                        "https://editsync.khulnasoft.com/docs/linux#editsync-fails-to-open-windows",
+                    );
                     cx.quit();
                 })
                 .ok();
@@ -489,7 +493,11 @@ fn register_actions(
                 })?;
                 Ok(())
             })
-            .detach_and_prompt_err("Error registering editsync:// scheme", cx, |_, _| None);
+            .detach_and_prompt_err(
+                "Error registering editsync:// scheme",
+                cx,
+                |_, _| None,
+            );
         })
         .register_action(|workspace, _: &OpenLog, cx| {
             open_log_file(workspace, cx);

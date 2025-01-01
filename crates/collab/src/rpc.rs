@@ -1001,12 +1001,13 @@ pub struct ProtocolVersion(u32);
 impl Header for ProtocolVersion {
     fn name() -> &'static HeaderName {
         static EDITSYNC_PROTOCOL_VERSION: OnceLock<HeaderName> = OnceLock::new();
-        EDITSYNC_PROTOCOL_VERSION.get_or_init(|| HeaderName::from_static("x-editsync-protocol-version"))
+        EDITSYNC_PROTOCOL_VERSION
+            .get_or_init(|| HeaderName::from_static("x-editsync-protocol-version"))
     }
 
     fn decode<'i, I>(values: &mut I) -> Result<Self, axum::headers::Error>
     where
-        Self: Sieditsync,
+        Self: Sized,
         I: Iterator<Item = &'i axum::http::HeaderValue>,
     {
         let version = values
@@ -1033,7 +1034,7 @@ impl Header for AppVersionHeader {
 
     fn decode<'i, I>(values: &mut I) -> Result<Self, axum::headers::Error>
     where
-        Self: Sieditsync,
+        Self: Sized,
         I: Iterator<Item = &'i axum::http::HeaderValue>,
     {
         let version = values

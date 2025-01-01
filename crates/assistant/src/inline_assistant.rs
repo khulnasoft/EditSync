@@ -16,7 +16,7 @@ use editor::{
     EditorStyle, ExcerptId, ExcerptRange, GutterDimensions, MultiBuffer, MultiBufferSnapshot,
     ToOffset as _, ToPoint,
 };
-use feature_flags::{FeatureFlagAppExt as _, EditsyncPro};
+use feature_flags::{EditsyncPro, FeatureFlagAppExt as _};
 use fs::Fs;
 use futures::{
     channel::mpsc,

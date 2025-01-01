@@ -23,7 +23,7 @@ need to set your `crate-type` accordingly:
 
 ```toml
 [dependencies]
-# editsync_extension_api = "0.1.0"
+editsync_extension_api = "0.2.0"
 
 [lib]
 crate-type = ["cdylib"]

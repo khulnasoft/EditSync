@@ -502,7 +502,7 @@ impl Item for ProjectSearchView {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         let model = self.model.update(cx, |model, cx| model.clone(cx));
         Some(cx.new_view(|cx| Self::new(self.workspace.clone(), model, cx, None)))

@@ -13,9 +13,9 @@ use std::borrow::Cow;
 use std::path::PathBuf;
 use std::str::FromStr;
 
+pub use editsync_actions::RevealTarget;
 pub use task_template::{HideStrategy, RevealStrategy, TaskTemplate, TaskTemplates};
 pub use vscode_format::VsCodeTaskFile;
-pub use editsync_actions::RevealTarget;
 
 /// Task identifier, unique within the application.
 /// Based on it, task reruns and terminal tabs are managed.

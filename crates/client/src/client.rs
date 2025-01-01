@@ -1,10 +1,10 @@
 #[cfg(any(test, feature = "test-support"))]
 pub mod test;
 
+pub mod editsync_urls;
 mod socks;
 pub mod telemetry;
 pub mod user;
-pub mod editsync_urls;
 
 use anyhow::{anyhow, bail, Context as _, Result};
 use async_recursion::async_recursion;
@@ -55,7 +55,8 @@ pub use user::*;
 
 static EDITSYNC_SERVER_URL: LazyLock<Option<String>> =
     LazyLock::new(|| std::env::var("EDITSYNC_SERVER_URL").ok());
-static EDITSYNC_RPC_URL: LazyLock<Option<String>> = LazyLock::new(|| std::env::var("EDITSYNC_RPC_URL").ok());
+static EDITSYNC_RPC_URL: LazyLock<Option<String>> =
+    LazyLock::new(|| std::env::var("EDITSYNC_RPC_URL").ok());
 
 /// An environment variable whose presence indicates that the development auth
 /// provider should be used.
@@ -243,7 +244,9 @@ impl From<WebsocketError> for EstablishConnectionError {
     fn from(error: WebsocketError) -> Self {
         if let WebsocketError::Http(response) = &error {
             match response.status() {
-                StatusCode::UNAUTHORIEDITSYNC => return EstablishConnectionError::Unauthorieditsync,
+                StatusCode::UNAUTHORIEDITSYNC => {
+                    return EstablishConnectionError::Unauthorieditsync
+                }
                 StatusCode::UPGRADE_REQUIRED => return EstablishConnectionError::UpgradeRequired,
                 _ => {}
             }
@@ -1115,7 +1118,10 @@ impl Client {
                 "x-editsync-protocol-version",
                 HeaderValue::from_str(&rpc::PROTOCOL_VERSION.to_string())?,
             );
-            request_headers.insert("x-editsync-app-version", HeaderValue::from_str(&app_version)?);
+            request_headers.insert(
+                "x-editsync-app-version",
+                HeaderValue::from_str(&app_version)?,
+            );
             request_headers.insert(
                 "x-editsync-release-channel",
                 HeaderValue::from_str(release_channel.map(|r| r.dev_name()).unwrap_or("unknown"))?,
@@ -1124,7 +1130,8 @@ impl Client {
                 request_headers.insert("x-editsync-system-id", HeaderValue::from_str(&system_id)?);
             }
             if let Some(metrics_id) = metrics_id {
-                request_headers.insert("x-editsync-metrics-id", HeaderValue::from_str(&metrics_id)?);
+                request_headers
+                    .insert("x-editsync-metrics-id", HeaderValue::from_str(&metrics_id)?);
             }
 
             match url_scheme {

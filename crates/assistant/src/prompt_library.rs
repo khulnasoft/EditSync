@@ -4,6 +4,7 @@ use anyhow::{anyhow, Result};
 use chrono::{DateTime, Utc};
 use collections::{HashMap, HashSet};
 use editor::{actions::Tab, CurrentLineHighlight, Editor, EditorElement, EditorEvent, EditorStyle};
+use editsync_actions::InlineAssist;
 use futures::{
     future::{self, BoxFuture, Shared},
     FutureExt,
@@ -44,7 +45,6 @@ use ui::{
 use util::{ResultExt, TryFutureExt};
 use uuid::Uuid;
 use workspace::Workspace;
-use editsync_actions::InlineAssist;
 
 actions!(
     prompt_library,

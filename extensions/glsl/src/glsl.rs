@@ -1,6 +1,6 @@
-use std::fs;
 use editsync::settings::LspSettings;
 use editsync_extension_api::{self as editsync, serde_json, LanguageServerId, Result};
+use std::fs;
 
 struct GlslExtension {
     cached_binary_path: Option<String>,

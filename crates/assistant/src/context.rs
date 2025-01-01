@@ -3269,7 +3269,10 @@ impl SavedContext {
                         serde_json::from_value::<SavedContextV0_1_0>(saved_context_json)?;
                     Ok(saved_context.upgrade())
                 }
-                _ => Err(anyhow!("unrecognieditsync saved context version: {}", version)),
+                _ => Err(anyhow!(
+                    "unrecognieditsync saved context version: {}",
+                    version
+                )),
             },
             _ => Err(anyhow!("version not found on saved context")),
         }

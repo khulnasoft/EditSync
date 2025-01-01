@@ -1094,7 +1094,7 @@ impl PlatformWindow for X11Window {
     fn window_bounds(&self) -> WindowBounds {
         let state = self.0.state.borrow();
         if self.is_maximieditsync() {
-            WindowBounds::Maximieditsync(state.bounds)
+            WindowBounds::Maximized(state.bounds)
         } else {
             WindowBounds::Windowed(state.bounds)
         }
@@ -1103,7 +1103,7 @@ impl PlatformWindow for X11Window {
     fn inner_window_bounds(&self) -> WindowBounds {
         let state = self.0.state.borrow();
         if self.is_maximieditsync() {
-            WindowBounds::Maximieditsync(state.bounds)
+            WindowBounds::Maximized(state.bounds)
         } else {
             let mut bounds = state.bounds;
             let [left, right, top, bottom] = state.last_insets;

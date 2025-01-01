@@ -1437,8 +1437,9 @@ mod tests {
 
         cx.set_state(indoc! {"https://editsync.khulnasoft.com/releases is a cool ˇwebpage."});
 
-        let screen_coord =
-            cx.pixel_position(indoc! {"https://editsync.khulnasoft.com/relˇeases is a cool webpage."});
+        let screen_coord = cx.pixel_position(
+            indoc! {"https://editsync.khulnasoft.com/relˇeases is a cool webpage."},
+        );
 
         cx.simulate_mouse_move(screen_coord, None, Modifiers::secondary_key());
         cx.assert_editor_text_highlights::<HoveredLinkState>(
@@ -1446,7 +1447,10 @@ mod tests {
         );
 
         cx.simulate_click(screen_coord, Modifiers::secondary_key());
-        assert_eq!(cx.opened_url(), Some("https://editsync.khulnasoft.com/releases".into()));
+        assert_eq!(
+            cx.opened_url(),
+            Some("https://editsync.khulnasoft.com/releases".into())
+        );
     }
 
     #[gpui::test]
@@ -1462,8 +1466,8 @@ mod tests {
 
         cx.set_state(indoc! {"A cool ˇwebpage is https://editsync.khulnasoft.com/releases"});
 
-        let screen_coord =
-            cx.pixel_position(indoc! {"A cool webpage is https://editsync.khulnasoft.com/releˇases"});
+        let screen_coord = cx
+            .pixel_position(indoc! {"A cool webpage is https://editsync.khulnasoft.com/releˇases"});
 
         cx.simulate_mouse_move(screen_coord, None, Modifiers::secondary_key());
         cx.assert_editor_text_highlights::<HoveredLinkState>(
@@ -1471,7 +1475,10 @@ mod tests {
         );
 
         cx.simulate_click(screen_coord, Modifiers::secondary_key());
-        assert_eq!(cx.opened_url(), Some("https://editsync.khulnasoft.com/releases".into()));
+        assert_eq!(
+            cx.opened_url(),
+            Some("https://editsync.khulnasoft.com/releases".into())
+        );
     }
 
     #[gpui::test]

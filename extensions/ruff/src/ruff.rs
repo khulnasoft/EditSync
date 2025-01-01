@@ -1,6 +1,6 @@
-use std::fs;
 use editsync::LanguageServerId;
 use editsync_extension_api::{self as editsync, settings::LspSettings, Result};
+use std::fs;
 
 struct RuffBinary {
     path: String,

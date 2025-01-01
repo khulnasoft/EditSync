@@ -838,7 +838,8 @@ mod tests {
 
     #[test]
     fn project_search() {
-        let path = Path::new("/Users/someonetoignore/work/editsync/editsync.khulnasoft.com/node_modules");
+        let path =
+            Path::new("/Users/someonetoignore/work/editsync/editsync.khulnasoft.com/node_modules");
         let path_matcher = PathMatcher::new(&["**/node_modules/**".to_owned()]).unwrap();
         assert!(
             path_matcher.is_match(path),

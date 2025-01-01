@@ -13,7 +13,7 @@ use editor::{
     actions::{MoveDown, MoveUp},
     Editor, EditorElement, EditorEvent, EditorMode, EditorStyle, GutterDimensions, MultiBuffer,
 };
-use feature_flags::{FeatureFlagAppExt as _, EditsyncPro};
+use feature_flags::{EditsyncPro, FeatureFlagAppExt as _};
 use fs::Fs;
 use gpui::{
     anchored, deferred, point, AnyElement, AppContext, ClickEvent, CursorStyle, EventEmitter,

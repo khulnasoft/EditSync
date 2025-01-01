@@ -60,7 +60,7 @@ pub enum PickerEditorPosition {
     End,
 }
 
-pub trait PickerDelegate: Sieditsync + 'static {
+pub trait PickerDelegate: Sized + 'static {
     type ListItem: IntoElement;
 
     fn match_count(&self) -> usize;

@@ -214,7 +214,9 @@ impl HttpClientWithUrl {
         let base_url = self.base_url();
         let base_api_url = match base_url.as_ref() {
             "https://editsync.khulnasoft.com" => "https://api.editsync.khulnasoft.com",
-            "https://staging.editsync.khulnasoft.com" => "https://api-staging.editsync.khulnasoft.com",
+            "https://staging.editsync.khulnasoft.com" => {
+                "https://api-staging.editsync.khulnasoft.com"
+            }
             "http://localhost:3000" => "http://localhost:8080",
             other => other,
         };
@@ -230,7 +232,9 @@ impl HttpClientWithUrl {
         let base_url = self.base_url();
         let base_api_url = match base_url.as_ref() {
             "https://editsync.khulnasoft.com" => "https://llm.editsync.khulnasoft.com",
-            "https://staging.editsync.khulnasoft.com" => "https://llm-staging.editsync.khulnasoft.com",
+            "https://staging.editsync.khulnasoft.com" => {
+                "https://llm-staging.editsync.khulnasoft.com"
+            }
             "http://localhost:3000" => "http://localhost:8080",
             other => other,
         };

@@ -999,7 +999,7 @@ impl Item for ProjectDiffEditor {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| {
             ProjectDiffEditor::new(self.project.clone(), self.workspace.clone(), cx)

@@ -46,7 +46,7 @@ impl Settings for JupyterSettings {
         _cx: &mut gpui::AppContext,
     ) -> anyhow::Result<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         let mut settings = JupyterSettings::default();
 

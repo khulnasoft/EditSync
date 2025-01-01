@@ -609,7 +609,7 @@ pub trait NotifyTaskExt {
 
 impl<R, E> NotifyTaskExt for Task<Result<R, E>>
 where
-    E: std::fmt::Debug + std::fmt::Display + Sieditsync + 'static,
+    E: std::fmt::Debug + std::fmt::Display + Sized + 'static,
     R: 'static,
 {
     fn detach_and_notify_err(self, cx: &mut WindowContext) {

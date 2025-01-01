@@ -1,5 +1,5 @@
-use std::fs;
 use editsync_extension_api::{self as editsync, LanguageServerId, Result};
+use std::fs;
 
 struct ClojureExtension {
     cached_binary_path: Option<String>,

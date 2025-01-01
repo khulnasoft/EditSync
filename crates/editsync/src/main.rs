@@ -1,8 +1,8 @@
 // Disable command line from opening on release mode
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-mod reliability;
 mod editsync;
+mod reliability;
 
 use anyhow::{anyhow, Context as _, Result};
 use chrono::Offset;
@@ -28,6 +28,11 @@ use log::LevelFilter;
 use reqwest_client::ReqwestClient;
 
 use assets::Assets;
+use editsync::{
+    app_menus, build_window_options, derive_paths_with_position, handle_cli_connection,
+    handle_keymap_file_changes, initialize_workspace, open_paths_with_positions, OpenListener,
+    OpenRequest,
+};
 use node_runtime::{NodeBinaryOptions, NodeRuntime};
 use parking_lot::Mutex;
 use project::project_settings::ProjectSettings;
@@ -54,11 +59,6 @@ use welcome::{show_welcome_view, BaseKeymap, FIRST_OPEN};
 use workspace::{
     notifications::{simple_message_notification::MessageNotification, NotificationId},
     AppState, SerialieditsyncWorkspaceLocation, WorkspaceSettings, WorkspaceStore,
-};
-use editsync::{
-    app_menus, build_window_options, derive_paths_with_position, handle_cli_connection,
-    handle_keymap_file_changes, initialize_workspace, open_paths_with_positions, OpenListener,
-    OpenRequest,
 };
 
 use crate::editsync::inline_completion_registry;
@@ -657,7 +657,9 @@ fn handle_settings_changed(error: Option<anyhow::Error>, cx: &mut AppContext) {
                                     ))
                                     .with_click_message("Open settings file")
                                     .on_click(|cx| {
-                                        cx.dispatch_action(editsync_actions::OpenSettings.boxed_clone());
+                                        cx.dispatch_action(
+                                            editsync_actions::OpenSettings.boxed_clone(),
+                                        );
                                         cx.emit(DismissEvent);
                                     })
                                 })

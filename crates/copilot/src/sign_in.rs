@@ -104,9 +104,9 @@ impl CopilotCodeVerification {
             _subscription: cx.observe(copilot, |this, copilot, cx| {
                 let status = copilot.read(cx).status();
                 match status {
-                    Status::Authorieditsync | Status::Unauthorieditsync | Status::SigningIn { .. } => {
-                        this.set_status(status, cx)
-                    }
+                    Status::Authorieditsync
+                    | Status::Unauthorieditsync
+                    | Status::SigningIn { .. } => this.set_status(status, cx),
                     _ => cx.emit(DismissEvent),
                 }
             }),

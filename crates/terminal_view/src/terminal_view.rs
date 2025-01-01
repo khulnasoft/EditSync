@@ -37,10 +37,10 @@ use workspace::{
 };
 
 use anyhow::Context;
+use editsync_actions::InlineAssist;
 use serde::Deserialize;
 use settings::{Settings, SettingsStore};
 use smol::Timer;
-use editsync_actions::InlineAssist;
 
 use std::{
     cmp,

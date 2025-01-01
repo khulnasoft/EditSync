@@ -80,11 +80,13 @@ impl Vim {
                 }
 
                 let first_selection_indent_column =
-                    clipboard_selections.as_ref().and_then(|editsync_selections| {
-                        editsync_selections
-                            .first()
-                            .map(|selection| selection.first_line_indent)
-                    });
+                    clipboard_selections
+                        .as_ref()
+                        .and_then(|editsync_selections| {
+                            editsync_selections
+                                .first()
+                                .map(|selection| selection.first_line_indent)
+                        });
                 let before = action.before || vim.mode == Mode::VisualLine;
 
                 let mut edits = Vec::new();

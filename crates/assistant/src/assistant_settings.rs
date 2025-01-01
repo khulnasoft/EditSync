@@ -281,56 +281,58 @@ impl AssistantSettingsContent {
         let provider = language_model.provider_id().0.to_string();
 
         match self {
-            AssistantSettingsContent::Versioned(settings) => match settings {
-                VersionedAssistantSettingsContent::V1(settings) => match provider.as_ref() {
-                    "editsync.khulnasoft.com" => {
-                        log::warn!("attempted to set editsync.khulnasoft.com model on outdated settings");
-                    }
-                    "anthropic" => {
-                        let api_url = match &settings.provider {
-                            Some(AssistantProviderContentV1::Anthropic { api_url, .. }) => {
-                                api_url.clone()
-                            }
-                            _ => None,
-                        };
-                        settings.provider = Some(AssistantProviderContentV1::Anthropic {
-                            default_model: AnthropicModel::from_id(&model).ok(),
-                            api_url,
-                        });
-                    }
-                    "ollama" => {
-                        let api_url = match &settings.provider {
-                            Some(AssistantProviderContentV1::Ollama { api_url, .. }) => {
-                                api_url.clone()
-                            }
-                            _ => None,
-                        };
-                        settings.provider = Some(AssistantProviderContentV1::Ollama {
-                            default_model: Some(ollama::Model::new(&model, None, None)),
-                            api_url,
-                        });
-                    }
-                    "openai" => {
-                        let (api_url, available_models) = match &settings.provider {
-                            Some(AssistantProviderContentV1::OpenAi {
+            AssistantSettingsContent::Versioned(settings) => {
+                match settings {
+                    VersionedAssistantSettingsContent::V1(settings) => match provider.as_ref() {
+                        "editsync.khulnasoft.com" => {
+                            log::warn!("attempted to set editsync.khulnasoft.com model on outdated settings");
+                        }
+                        "anthropic" => {
+                            let api_url = match &settings.provider {
+                                Some(AssistantProviderContentV1::Anthropic { api_url, .. }) => {
+                                    api_url.clone()
+                                }
+                                _ => None,
+                            };
+                            settings.provider = Some(AssistantProviderContentV1::Anthropic {
+                                default_model: AnthropicModel::from_id(&model).ok(),
+                                api_url,
+                            });
+                        }
+                        "ollama" => {
+                            let api_url = match &settings.provider {
+                                Some(AssistantProviderContentV1::Ollama { api_url, .. }) => {
+                                    api_url.clone()
+                                }
+                                _ => None,
+                            };
+                            settings.provider = Some(AssistantProviderContentV1::Ollama {
+                                default_model: Some(ollama::Model::new(&model, None, None)),
+                                api_url,
+                            });
+                        }
+                        "openai" => {
+                            let (api_url, available_models) = match &settings.provider {
+                                Some(AssistantProviderContentV1::OpenAi {
+                                    api_url,
+                                    available_models,
+                                    ..
+                                }) => (api_url.clone(), available_models.clone()),
+                                _ => (None, None),
+                            };
+                            settings.provider = Some(AssistantProviderContentV1::OpenAi {
+                                default_model: OpenAiModel::from_id(&model).ok(),
                                 api_url,
                                 available_models,
-                                ..
-                            }) => (api_url.clone(), available_models.clone()),
-                            _ => (None, None),
-                        };
-                        settings.provider = Some(AssistantProviderContentV1::OpenAi {
-                            default_model: OpenAiModel::from_id(&model).ok(),
-                            api_url,
-                            available_models,
-                        });
+                            });
+                        }
+                        _ => {}
+                    },
+                    VersionedAssistantSettingsContent::V2(settings) => {
+                        settings.default_model = Some(LanguageModelSelection { provider, model });
                     }
-                    _ => {}
-                },
-                VersionedAssistantSettingsContent::V2(settings) => {
-                    settings.default_model = Some(LanguageModelSelection { provider, model });
                 }
-            },
+            }
             AssistantSettingsContent::Legacy(settings) => {
                 if let Ok(model) = OpenAiModel::from_id(&language_model.id().0) {
                     settings.default_open_ai_model = Some(model);

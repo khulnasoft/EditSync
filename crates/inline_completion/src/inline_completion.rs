@@ -17,7 +17,7 @@ pub struct InlineCompletion {
     pub edits: Vec<(Range<language::Anchor>, String)>,
 }
 
-pub trait InlineCompletionProvider: 'static + Sieditsync {
+pub trait InlineCompletionProvider: 'static + Sized {
     fn name() -> &'static str;
     fn display_name() -> &'static str;
     fn show_completions_in_menu() -> bool;

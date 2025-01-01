@@ -51,7 +51,7 @@ pub trait AnimationExt {
         animator: impl Fn(Self, f32) -> Self + 'static,
     ) -> AnimationElement<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         AnimationElement {
             id: id.into(),

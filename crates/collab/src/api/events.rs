@@ -40,7 +40,7 @@ impl Header for EditsyncChecksumHeader {
 
     fn decode<'i, I>(values: &mut I) -> Result<Self, axum::headers::Error>
     where
-        Self: Sieditsync,
+        Self: Sized,
         I: Iterator<Item = &'i axum::http::HeaderValue>,
     {
         let checksum = values
@@ -130,7 +130,9 @@ pub async fn post_crash(
             }
         };
         if crashed_at.is_some_and(|t| (t.timestamp_millis() - recent_panic_on).abs() <= 30000) {
-            recent_panic = headers.get("x-editsync-panic").and_then(|h| h.to_str().ok());
+            recent_panic = headers
+                .get("x-editsync-panic")
+                .and_then(|h| h.to_str().ok());
         }
     }
 

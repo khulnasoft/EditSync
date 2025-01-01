@@ -1,5 +1,5 @@
-use std::fs;
 use editsync_extension_api::{self as editsync, settings::LspSettings, LanguageServerId, Result};
+use std::fs;
 
 struct OmnisharpBinary {
     path: String,
@@ -96,7 +96,9 @@ impl CsharpExtension {
                 &asset.download_url,
                 &version_dir,
                 match platform {
-                    editsync::Os::Mac | editsync::Os::Linux => editsync::DownloadedFileType::GzipTar,
+                    editsync::Os::Mac | editsync::Os::Linux => {
+                        editsync::DownloadedFileType::GzipTar
+                    }
                     editsync::Os::Windows => editsync::DownloadedFileType::Zip,
                 },
             )

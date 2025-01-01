@@ -276,7 +276,7 @@ pub trait Entity<T>: Sealed {
     /// Upgrade this entity from a weak reference.
     fn upgrade_from(weak: &Self::Weak) -> Option<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
 }
 
 /// A trait for tying together the types of a GPUI entity and the events it can

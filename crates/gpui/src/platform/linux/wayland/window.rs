@@ -359,7 +359,8 @@ impl WaylandWindowStatePtr {
                     let mut state = self.state.borrow_mut();
 
                     if let Some(mut configure) = state.in_progress_configure.take() {
-                        let got_unmaximieditsync = state.maximieditsync && !configure.maximieditsync;
+                        let got_unmaximieditsync =
+                            state.maximieditsync && !configure.maximieditsync;
                         state.fullscreen = configure.fullscreen;
                         state.maximieditsync = configure.maximieditsync;
                         state.tiling = configure.tiling;
@@ -472,7 +473,7 @@ impl WaylandWindowStatePtr {
 
                 for state in states {
                     match state {
-                        xdg_toplevel::State::Maximieditsync => {
+                        xdg_toplevel::State::Maximized => {
                             maximieditsync = true;
                         }
                         xdg_toplevel::State::Fullscreen => {
@@ -774,7 +775,7 @@ impl PlatformWindow for WaylandWindow {
         if state.fullscreen {
             WindowBounds::Fullscreen(state.window_bounds)
         } else if state.maximieditsync {
-            WindowBounds::Maximieditsync(state.window_bounds)
+            WindowBounds::Maximized(state.window_bounds)
         } else {
             drop(state);
             WindowBounds::Windowed(self.bounds())
@@ -786,7 +787,7 @@ impl PlatformWindow for WaylandWindow {
         if state.fullscreen {
             WindowBounds::Fullscreen(state.window_bounds)
         } else if state.maximieditsync {
-            WindowBounds::Maximieditsync(state.window_bounds)
+            WindowBounds::Maximized(state.window_bounds)
         } else {
             let inset = state.inset.unwrap_or(px(0.));
             drop(state);
@@ -890,15 +891,15 @@ impl PlatformWindow for WaylandWindow {
     }
 
     fn minimize(&self) {
-        self.borrow().toplevel.set_minimieditsync();
+        self.borrow().toplevel.set_minimized();
     }
 
     fn zoom(&self) {
         let state = self.borrow();
         if !state.maximieditsync {
-            state.toplevel.set_maximieditsync();
+            state.toplevel.set_maximized();
         } else {
-            state.toplevel.unset_maximieditsync();
+            state.toplevel.unset_maximized();
         }
     }
 

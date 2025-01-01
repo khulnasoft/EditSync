@@ -55,13 +55,13 @@ pub trait Action: 'static + Send {
     /// Get the name of this action for debugging
     fn debug_name() -> &'static str
     where
-        Self: Sieditsync;
+        Self: Sized;
 
     /// Build this action from a JSON value. This is used to construct actions from the keymap.
     /// A value of `{}` will be passed for actions that don't have any parameters.
     fn build(value: serde_json::Value) -> Result<Box<dyn Action>>
     where
-        Self: Sieditsync;
+        Self: Sized;
 }
 
 impl std::fmt::Debug for dyn Action {
@@ -290,7 +290,7 @@ macro_rules! __impl_action {
 
             fn debug_name() -> &'static str
             where
-                Self: ::std::marker::Sieditsync
+                Self: ::std::marker::Sized
             {
                 concat!(
                     stringify!($namespace),

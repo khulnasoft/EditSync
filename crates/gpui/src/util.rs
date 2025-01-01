@@ -14,7 +14,7 @@ pub trait FluentBuilder {
     /// Imperatively modify self with the given closure.
     fn map<U>(self, f: impl FnOnce(Self) -> U) -> U
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         f(self)
     }
@@ -22,7 +22,7 @@ pub trait FluentBuilder {
     /// Conditionally modify self with the given closure.
     fn when(self, condition: bool, then: impl FnOnce(Self) -> Self) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.map(|this| if condition { then(this) } else { this })
     }
@@ -30,7 +30,7 @@ pub trait FluentBuilder {
     /// Conditionally unwrap and modify self with the given closure, if the given option is Some.
     fn when_some<T>(self, option: Option<T>, then: impl FnOnce(Self, T) -> Self) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.map(|this| {
             if let Some(value) = option {

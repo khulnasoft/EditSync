@@ -1,6 +1,7 @@
 use anyhow::Result;
 use copilot::{Copilot, Status};
 use editor::{scroll::Autoscroll, Editor};
+use editsync_actions::OpenBrowser;
 use feature_flags::{FeatureFlagAppExt, ZetaFeatureFlag};
 use fs::Fs;
 use gpui::{
@@ -25,7 +26,6 @@ use workspace::{
     },
     StatusItemView, Toast, Workspace,
 };
-use editsync_actions::OpenBrowser;
 use zeta::RateCompletionModal;
 
 actions!(zeta, [RateCompletions]);

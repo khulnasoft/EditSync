@@ -23,7 +23,7 @@ use crate::{
 use anyhow::Result;
 use assistant_slash_command::{SlashCommand, SlashCommandOutputSection};
 use assistant_tool::ToolWorkingSet;
-use client::{proto, editsync_urls, Client, Status};
+use client::{editsync_urls, proto, Client, Status};
 use collections::{hash_map, BTreeSet, HashMap, HashSet};
 use editor::{
     actions::{FoldAt, MoveToEndOfLine, Newline, ShowCompletions, UnfoldAt},
@@ -36,6 +36,7 @@ use editor::{
     ToOffset as _, ToPoint,
 };
 use editor::{display_map::CreaseId, FoldPlaceholder};
+use editsync_actions::InlineAssist;
 use fs::Fs;
 use futures::FutureExt;
 use gpui::{
@@ -93,7 +94,6 @@ use workspace::{
     ToolbarItemLocation, ToolbarItemView, Workspace,
 };
 use workspace::{searchable::SearchableItemHandle, DraggedTab};
-use editsync_actions::InlineAssist;
 
 pub fn init(cx: &mut AppContext) {
     workspace::FollowableViewRegistry::register::<ContextEditor>(cx);
@@ -665,7 +665,9 @@ impl AssistantPanel {
         // If we're signed out and don't have a provider configured, or we're signed-out AND Editsync.dev is
         // the provider, we want to show a nudge to sign in.
         let show_editsync_ai_notice = client_status.is_signed_out()
-            && active_provider.map_or(true, |provider| provider.id().0 == EDITSYNC_CLOUD_PROVIDER_ID);
+            && active_provider.map_or(true, |provider| {
+                provider.id().0 == EDITSYNC_CLOUD_PROVIDER_ID
+            });
 
         self.show_editsync_ai_notice = show_editsync_ai_notice;
         cx.notify();
@@ -3567,7 +3569,8 @@ impl ContextEditor {
     fn render_notice(&self, cx: &mut ViewContext<Self>) -> Option<AnyElement> {
         use feature_flags::FeatureFlagAppExt;
         let nudge = self.assistant_panel.upgrade().map(|assistant_panel| {
-            assistant_panel.read(cx).show_editsync_ai_notice && cx.has_flag::<feature_flags::EditsyncPro>()
+            assistant_panel.read(cx).show_editsync_ai_notice
+                && cx.has_flag::<feature_flags::EditsyncPro>()
         });
 
         if nudge.map_or(false, |value| value) {
@@ -3582,7 +3585,9 @@ impl ContextEditor {
                         h_flex()
                             .gap_3()
                             .child(Icon::new(IconName::EditsyncAssistant).color(Color::Accent))
-                            .child(Label::new("Editsync AI is here! Get started by signing in →")),
+                            .child(Label::new(
+                                "Editsync AI is here! Get started by signing in →",
+                            )),
                     )
                     .child(
                         Button::new("sign-in", "Sign in")

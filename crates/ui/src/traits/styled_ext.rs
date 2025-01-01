@@ -18,7 +18,7 @@ fn elevated_borderless<E: Styled>(this: E, cx: &WindowContext, index: ElevationI
 }
 
 /// Extends [`gpui::Styled`] with Editsync-specific styling methods.
-pub trait StyledExt: Styled + Sieditsync {
+pub trait StyledExt: Styled + Sized {
     /// Horizontally stacks elements.
     ///
     /// Sets `flex()`, `flex_row()`, `items_center()`

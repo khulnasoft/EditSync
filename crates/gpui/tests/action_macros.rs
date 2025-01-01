@@ -35,14 +35,14 @@ fn test_action_macros() {
 
         fn debug_name() -> &'static str
         where
-            Self: Sieditsync,
+            Self: Sized,
         {
             unimplemented!()
         }
 
         fn build(_value: serde_json::Value) -> anyhow::Result<Box<dyn gpui::Action>>
         where
-            Self: Sieditsync,
+            Self: Sized,
         {
             unimplemented!()
         }

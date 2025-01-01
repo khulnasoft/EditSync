@@ -1,6 +1,6 @@
-use std::fs;
 use editsync::LanguageServerId;
 use editsync_extension_api::{self as editsync, Result};
+use std::fs;
 
 struct TerraformExtension {
     cached_binary_path: Option<String>,
@@ -59,8 +59,12 @@ impl TerraformExtension {
                 &editsync::LanguageServerInstallationStatus::Downloading,
             );
 
-            editsync::download_file(&download_url, &version_dir, editsync::DownloadedFileType::Zip)
-                .map_err(|e| format!("failed to download file: {e}"))?;
+            editsync::download_file(
+                &download_url,
+                &version_dir,
+                editsync::DownloadedFileType::Zip,
+            )
+            .map_err(|e| format!("failed to download file: {e}"))?;
 
             editsync::make_file_executable(&binary_path)?;
 

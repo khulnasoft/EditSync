@@ -1,6 +1,6 @@
-use std::fs;
 use editsync::LanguageServerId;
 use editsync_extension_api::{self as editsync, Result};
+use std::fs;
 
 struct TomlExtension {
     cached_binary_path: Option<String>,

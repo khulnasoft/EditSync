@@ -1,5 +1,5 @@
-use std::{env, fs};
 use editsync_extension_api::{self as editsync, serde_json, Result};
+use std::{env, fs};
 
 const SERVER_PATH: &str = "node_modules/.bin/purescript-language-server";
 const PACKAGE_NAME: &str = "purescript-language-server";
@@ -13,7 +13,10 @@ impl PurescriptExtension {
         fs::metadata(SERVER_PATH).map_or(false, |stat| stat.is_file())
     }
 
-    fn server_script_path(&mut self, language_server_id: &editsync::LanguageServerId) -> Result<String> {
+    fn server_script_path(
+        &mut self,
+        language_server_id: &editsync::LanguageServerId,
+    ) -> Result<String> {
         let server_exists = self.server_exists();
         if self.did_find_server && server_exists {
             return Ok(SERVER_PATH.to_string());

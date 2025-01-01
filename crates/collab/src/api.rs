@@ -38,7 +38,7 @@ impl Header for CloudflareIpCountryHeader {
 
     fn decode<'i, I>(values: &mut I) -> Result<Self, axum::headers::Error>
     where
-        Self: Sieditsync,
+        Self: Sized,
         I: Iterator<Item = &'i axum::http::HeaderValue>,
     {
         let country_code = values
@@ -71,7 +71,7 @@ impl Header for SystemIdHeader {
 
     fn decode<'i, I>(values: &mut I) -> Result<Self, axum::headers::Error>
     where
-        Self: Sieditsync,
+        Self: Sized,
         I: Iterator<Item = &'i axum::http::HeaderValue>,
     {
         let system_id = values

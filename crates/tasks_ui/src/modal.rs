@@ -1,6 +1,7 @@
 use std::sync::Arc;
 
 use crate::active_item_selection_properties;
+pub use editsync_actions::{Rerun, Spawn};
 use fuzzy::{StringMatch, StringMatchCandidate};
 use gpui::{
     rems, Action, AnyElement, AppContext, DismissEvent, EventEmitter, FocusableView,
@@ -18,7 +19,6 @@ use ui::{
 };
 use util::ResultExt;
 use workspace::{tasks::schedule_resolved_task, ModalView, Workspace};
-pub use editsync_actions::{Rerun, Spawn};
 
 /// A modal used to spawn new tasks.
 pub(crate) struct TasksModalDelegate {

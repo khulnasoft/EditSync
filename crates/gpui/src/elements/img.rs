@@ -142,7 +142,7 @@ impl Default for ImageStyle {
 }
 
 /// Style an image element.
-pub trait StyledImage: Sieditsync {
+pub trait StyledImage: Sized {
     /// Get a mutable [ImageStyle] from the element.
     fn image_style(&mut self) -> &mut ImageStyle;
 

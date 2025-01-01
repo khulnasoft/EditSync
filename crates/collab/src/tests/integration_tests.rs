@@ -3379,7 +3379,10 @@ async fn test_local_settings(
         .unwrap();
     client_a
         .fs()
-        .insert_file("/dir/b/.editsync/settings.json", r#"{"tab_size": 4}"#.into())
+        .insert_file(
+            "/dir/b/.editsync/settings.json",
+            r#"{"tab_size": 4}"#.into(),
+        )
         .await;
     executor.run_until_parked();
     cx_b.read(|cx| {
@@ -3402,11 +3405,17 @@ async fn test_local_settings(
     // As client A, change and remove settings files while client B is disconnected.
     client_a
         .fs()
-        .insert_file("/dir/a/.editsync/settings.json", r#"{"hard_tabs":true}"#.into())
+        .insert_file(
+            "/dir/a/.editsync/settings.json",
+            r#"{"hard_tabs":true}"#.into(),
+        )
         .await;
     client_a
         .fs()
-        .remove_file("/dir/b/.editsync/settings.json".as_ref(), Default::default())
+        .remove_file(
+            "/dir/b/.editsync/settings.json".as_ref(),
+            Default::default(),
+        )
         .await
         .unwrap();
     executor.run_until_parked();

@@ -446,7 +446,7 @@ impl EditorTestContext {
     }
 
     #[track_caller]
-    pub fn assert_editor_text_highlights<Tag: ?Sieditsync + 'static>(&mut self, marked_text: &str) {
+    pub fn assert_editor_text_highlights<Tag: ?Sized + 'static>(&mut self, marked_text: &str) {
         let expected_ranges = self.ranges(marked_text);
         let snapshot = self.update_editor(|editor, cx| editor.snapshot(cx));
         let actual_ranges: Vec<Range<usize>> = snapshot

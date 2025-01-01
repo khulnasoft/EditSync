@@ -433,18 +433,18 @@ where
 pub trait TryFutureExt {
     fn log_err(self) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
 
     fn log_tracked_err(self, location: core::panic::Location<'static>) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
 
     fn warn_on_err(self) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
     fn unwrap(self) -> UnwrapFuture<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
 }
 
 impl<F, T, E> TryFutureExt for F
@@ -455,7 +455,7 @@ where
     #[track_caller]
     fn log_err(self) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         let location = Location::caller();
         LogErrorFuture(self, log::Level::Error, *location)
@@ -463,7 +463,7 @@ where
 
     fn log_tracked_err(self, location: core::panic::Location<'static>) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         LogErrorFuture(self, log::Level::Error, location)
     }
@@ -471,7 +471,7 @@ where
     #[track_caller]
     fn warn_on_err(self) -> LogErrorFuture<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         let location = Location::caller();
         LogErrorFuture(self, log::Level::Warn, *location)
@@ -479,7 +479,7 @@ where
 
     fn unwrap(self) -> UnwrapFuture<Self>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         UnwrapFuture(self)
     }

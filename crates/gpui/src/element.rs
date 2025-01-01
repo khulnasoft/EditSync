@@ -95,7 +95,7 @@ pub trait Element: 'static + IntoElement {
 }
 
 /// Implemented by any type that can be converted into an element.
-pub trait IntoElement: Sieditsync {
+pub trait IntoElement: Sized {
     /// The specific type of element into which the implementing type is converted.
     /// Useful for converting other types into elements automatically, like Strings
     type Element: Element;
@@ -113,7 +113,7 @@ impl<T: IntoElement> FluentBuilder for T {}
 
 /// An object that can be drawn to the screen. This is the trait that distinguishes `Views` from
 /// models. Views are drawn to the screen and care about the current window's state, models are not and do not.
-pub trait Render: 'static + Sieditsync {
+pub trait Render: 'static + Sized {
     /// Render this view into an element tree.
     fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement;
 }
@@ -145,7 +145,7 @@ pub trait ParentElement {
     /// Add a single child element to this element.
     fn child(mut self, child: impl IntoElement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.extend(std::iter::once(child.into_element().into_any()));
         self
@@ -154,7 +154,7 @@ pub trait ParentElement {
     /// Add multiple child elements to this element.
     fn children(mut self, children: impl IntoIterator<Item = impl IntoElement>) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.extend(children.into_iter().map(|child| child.into_any_element()));
         self

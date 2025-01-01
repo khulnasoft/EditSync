@@ -1,9 +1,9 @@
-use std::{env, fs};
 use editsync::{
     serde_json::{self, Value},
     settings::LspSettings,
 };
 use editsync_extension_api::{self as editsync, Result};
+use std::{env, fs};
 
 const SERVER_PATH: &str = "node_modules/@elm-tooling/elm-language-server/out/node/index.js";
 const PACKAGE_NAME: &str = "@elm-tooling/elm-language-server";

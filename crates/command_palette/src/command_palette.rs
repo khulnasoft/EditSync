@@ -16,12 +16,12 @@ use gpui::{
 };
 use picker::{Picker, PickerDelegate};
 
+use editsync_actions::{command_palette::Toggle, OpenEditsyncUrl};
 use postage::{sink::Sink, stream::Stream};
 use settings::Settings;
 use ui::{h_flex, prelude::*, v_flex, HighlightedLabel, KeyBinding, ListItem, ListItemSpacing};
 use util::ResultExt;
 use workspace::{ModalView, Workspace, WorkspaceSettings};
-use editsync_actions::{command_palette::Toggle, OpenEditsyncUrl};
 
 pub fn init(cx: &mut AppContext) {
     client::init_settings(cx);

@@ -8079,7 +8079,7 @@ mod tests {
             cx: &mut ViewContext<Self>,
         ) -> Self
         where
-            Self: Sieditsync,
+            Self: Sized,
         {
             Self {
                 path: project_item.update(cx, |project_item, _| project_item.path.clone()),

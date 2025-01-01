@@ -14894,7 +14894,7 @@ pub(crate) fn split_words(text: &str) -> impl std::iter::Iterator<Item = &str> +
         })
 }
 
-pub trait RangeToAnchorExt: Sieditsync {
+pub trait RangeToAnchorExt: Sized {
     fn to_anchors(self, snapshot: &MultiBufferSnapshot) -> Range<Anchor>;
 
     fn to_display_points(self, snapshot: &EditorSnapshot) -> Range<DisplayPoint> {

@@ -25,7 +25,12 @@ async fn test_core_channel_buffers(
     let client_b = server.create_client(cx_b, "user_b").await;
 
     let channel_id = server
-        .make_channel("editsync", None, (&client_a, cx_a), &mut [(&client_b, cx_b)])
+        .make_channel(
+            "editsync",
+            None,
+            (&client_a, cx_a),
+            &mut [(&client_b, cx_b)],
+        )
         .await;
 
     // Client A joins the channel buffer

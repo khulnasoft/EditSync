@@ -47,7 +47,7 @@ pub trait Settings: 'static + Send + Sync {
     /// final value for this setting.
     fn load(sources: SettingsSources<Self::FileContent>, cx: &mut AppContext) -> Result<Self>
     where
-        Self: Sieditsync;
+        Self: Sized;
 
     fn json_schema(
         generator: &mut SchemaGenerator,
@@ -64,7 +64,7 @@ pub trait Settings: 'static + Send + Sync {
     #[track_caller]
     fn register(cx: &mut AppContext)
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         SettingsStore::update_global(cx, |store, cx| {
             store.register_setting::<Self>(cx);
@@ -74,7 +74,7 @@ pub trait Settings: 'static + Send + Sync {
     #[track_caller]
     fn get<'a>(path: Option<SettingsLocation>, cx: &'a AppContext) -> &'a Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         cx.global::<SettingsStore>().get(path)
     }
@@ -82,7 +82,7 @@ pub trait Settings: 'static + Send + Sync {
     #[track_caller]
     fn get_global(cx: &AppContext) -> &Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         cx.global::<SettingsStore>().get(None)
     }
@@ -90,7 +90,7 @@ pub trait Settings: 'static + Send + Sync {
     #[track_caller]
     fn try_read_global<R>(cx: &AsyncAppContext, f: impl FnOnce(&Self) -> R) -> Option<R>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         cx.try_read_global(|s: &SettingsStore, _| f(s.get(None)))
     }
@@ -98,7 +98,7 @@ pub trait Settings: 'static + Send + Sync {
     #[track_caller]
     fn override_global(settings: Self, cx: &mut AppContext)
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         cx.global_mut::<SettingsStore>().override_global(settings)
     }
@@ -1082,7 +1082,10 @@ impl<T: Settings> AnySettingValue for SettingValue<T> {
         )?))
     }
 
-    fn deserialize_setting(&self, mut json: &serde_json::Value) -> Result<DeserialieditsyncSetting> {
+    fn deserialize_setting(
+        &self,
+        mut json: &serde_json::Value,
+    ) -> Result<DeserialieditsyncSetting> {
         if let Some(key) = T::KEY {
             if let Some(value) = json.get(key) {
                 json = value;

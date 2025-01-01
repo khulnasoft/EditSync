@@ -507,7 +507,7 @@ pub trait LspAdapter: 'static + Send + Sync {
     }
 }
 
-async fn try_fetch_server_binary<L: LspAdapter + 'static + Send + Sync + ?Sieditsync>(
+async fn try_fetch_server_binary<L: LspAdapter + 'static + Send + Sync + ?Sized>(
     adapter: &L,
     delegate: &Arc<dyn LspAdapterDelegate>,
     container_dir: PathBuf,

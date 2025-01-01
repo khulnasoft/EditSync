@@ -48,9 +48,11 @@ fn build_serialieditsync_pane_group(
                 .collect::<Vec<_>>(),
             flexes: Some(flexes.lock().clone()),
         },
-        Member::Pane(pane_handle) => {
-            SerialieditsyncPaneGroup::Pane(serialize_pane(pane_handle, pane_handle == active_pane, cx))
-        }
+        Member::Pane(pane_handle) => SerialieditsyncPaneGroup::Pane(serialize_pane(
+            pane_handle,
+            pane_handle == active_pane,
+            cx,
+        )),
     }
 }
 

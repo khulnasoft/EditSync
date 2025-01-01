@@ -435,7 +435,7 @@ impl Interactivity {
     /// See [`ViewContext::listener`](crate::ViewContext::listener) to get access to a view's state from this callback.
     pub fn on_click(&mut self, listener: impl Fn(&ClickEvent, &mut WindowContext) + 'static)
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.click_listeners
             .push(Box::new(move |event, cx| listener(event, cx)));
@@ -452,7 +452,7 @@ impl Interactivity {
         value: T,
         constructor: impl Fn(&T, Point<Pixels>, &mut WindowContext) -> View<W> + 'static,
     ) where
-        Self: Sieditsync,
+        Self: Sized,
         T: 'static,
         W: 'static + Render,
     {
@@ -475,7 +475,7 @@ impl Interactivity {
     /// See [`ViewContext::listener`](crate::ViewContext::listener) to get access to a view's state from this callback.
     pub fn on_hover(&mut self, listener: impl Fn(&bool, &mut WindowContext) + 'static)
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         debug_assert!(
             self.hover_listener.is_none(),
@@ -488,7 +488,7 @@ impl Interactivity {
     /// The imperative API equivalent to [`InteractiveElement::tooltip`]
     pub fn tooltip(&mut self, build_tooltip: impl Fn(&mut WindowContext) -> AnyView + 'static)
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         debug_assert!(
             self.tooltip_builder.is_none(),
@@ -507,7 +507,7 @@ impl Interactivity {
         &mut self,
         build_tooltip: impl Fn(&mut WindowContext) -> AnyView + 'static,
     ) where
-        Self: Sieditsync,
+        Self: Sized,
     {
         debug_assert!(
             self.tooltip_builder.is_none(),
@@ -528,7 +528,7 @@ impl Interactivity {
 
 /// A trait for elements that want to use the standard GPUI event handlers that don't
 /// require any state.
-pub trait InteractiveElement: Sieditsync {
+pub trait InteractiveElement: Sized {
     /// Retrieve the interactivity state associated with this element
     fn interactivity(&mut self) -> &mut Interactivity;
 
@@ -939,7 +939,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
     /// Set the given styles to be applied when this element is active.
     fn active(mut self, f: impl FnOnce(StyleRefinement) -> StyleRefinement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().active_style = Some(Box::new(f(StyleRefinement::default())));
         self
@@ -952,7 +952,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
         f: impl FnOnce(StyleRefinement) -> StyleRefinement,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().group_active_style = Some(GroupStyle {
             group: group_name.into(),
@@ -967,7 +967,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
     /// See [`ViewContext::listener`](crate::ViewContext::listener) to get access to a view's state from this callback.
     fn on_click(mut self, listener: impl Fn(&ClickEvent, &mut WindowContext) + 'static) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().on_click(listener);
         self
@@ -986,7 +986,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
         constructor: impl Fn(&T, Point<Pixels>, &mut WindowContext) -> View<W> + 'static,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
         T: 'static,
         W: 'static + Render,
     {
@@ -1001,7 +1001,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
     /// See [`ViewContext::listener`](crate::ViewContext::listener) to get access to a view's state from this callback.
     fn on_hover(mut self, listener: impl Fn(&bool, &mut WindowContext) + 'static) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().on_hover(listener);
         self
@@ -1011,7 +1011,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
     /// The fluent API equivalent to [`Interactivity::tooltip`]
     fn tooltip(mut self, build_tooltip: impl Fn(&mut WindowContext) -> AnyView + 'static) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().tooltip(build_tooltip);
         self
@@ -1025,7 +1025,7 @@ pub trait StatefulInteractiveElement: InteractiveElement {
         build_tooltip: impl Fn(&mut WindowContext) -> AnyView + 'static,
     ) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().hoverable_tooltip(build_tooltip);
         self
@@ -1037,7 +1037,7 @@ pub trait FocusableElement: InteractiveElement {
     /// Set the given styles to be applied when this element, specifically, is focused.
     fn focus(mut self, f: impl FnOnce(StyleRefinement) -> StyleRefinement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().focus_style = Some(Box::new(f(StyleRefinement::default())));
         self
@@ -1046,7 +1046,7 @@ pub trait FocusableElement: InteractiveElement {
     /// Set the given styles to be applied when this element is inside another element that is focused.
     fn in_focus(mut self, f: impl FnOnce(StyleRefinement) -> StyleRefinement) -> Self
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity().in_focus_style = Some(Box::new(f(StyleRefinement::default())));
         self

@@ -662,7 +662,7 @@ impl Window {
         if let Some(ref window_open_state) = window_bounds {
             match window_open_state {
                 WindowBounds::Fullscreen(_) => platform_window.toggle_fullscreen(),
-                WindowBounds::Maximieditsync(_) => platform_window.zoom(),
+                WindowBounds::Maximized(_) => platform_window.zoom(),
                 WindowBounds::Windowed(_) => {}
             }
         }
@@ -4518,7 +4518,7 @@ impl<'a, V: 'static> ViewContext<'a, V> {
     /// Many GPUI callbacks take the form of `Fn(&E, &mut WindowContext)`,
     /// but it's often useful to be able to access view state in these
     /// callbacks. This method provides a convenient way to do so.
-    pub fn listener<E: ?Sieditsync>(
+    pub fn listener<E: ?Sized>(
         &self,
         f: impl Fn(&mut V, &E, &mut ViewContext<V>) + 'static,
     ) -> impl Fn(&E, &mut WindowContext) + 'static {

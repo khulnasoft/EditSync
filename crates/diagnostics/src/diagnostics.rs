@@ -747,7 +747,7 @@ impl Item for ProjectDiagnosticsEditor {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| {
             ProjectDiagnosticsEditor::new(

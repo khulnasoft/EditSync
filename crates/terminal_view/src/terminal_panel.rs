@@ -3,7 +3,8 @@ use std::{cmp, ops::ControlFlow, path::PathBuf, sync::Arc, time::Duration};
 use crate::{
     default_working_directory,
     persistence::{
-        deserialize_terminal_panel, serialize_pane_group, SerialieditsyncItems, SerialieditsyncTerminalPanel,
+        deserialize_terminal_panel, serialize_pane_group, SerialieditsyncItems,
+        SerialieditsyncTerminalPanel,
     },
     TerminalView,
 };

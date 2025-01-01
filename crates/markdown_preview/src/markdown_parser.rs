@@ -894,7 +894,10 @@ mod tests {
 
         assert_eq!(
             parsed.children,
-            vec![p("Checkout this https://editsync.khulnasoft.com link", 0..34)]
+            vec![p(
+                "Checkout this https://editsync.khulnasoft.com link",
+                0..34
+            )]
         );
     }
 

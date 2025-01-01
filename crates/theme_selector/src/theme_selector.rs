@@ -1,3 +1,4 @@
+use editsync_actions::theme_selector::Toggle;
 use fs::Fs;
 use fuzzy::{match_strings, StringMatch, StringMatchCandidate};
 use gpui::{
@@ -11,7 +12,6 @@ use theme::{Appearance, Theme, ThemeMeta, ThemeRegistry, ThemeSettings};
 use ui::{prelude::*, v_flex, ListItem, ListItemSpacing};
 use util::ResultExt;
 use workspace::{ui::HighlightedLabel, ModalView, Workspace};
-use editsync_actions::theme_selector::Toggle;
 
 actions!(theme_selector, [Reload]);
 

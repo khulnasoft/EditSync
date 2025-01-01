@@ -159,7 +159,10 @@ impl ProjectEnvironment {
 }
 
 fn set_origin_marker(env: &mut HashMap<String, String>, origin: EnvironmentOrigin) {
-    env.insert(EDITSYNC_ENVIRONMENT_ORIGIN_MARKER.to_string(), origin.into());
+    env.insert(
+        EDITSYNC_ENVIRONMENT_ORIGIN_MARKER.to_string(),
+        origin.into(),
+    );
 }
 
 const EDITSYNC_ENVIRONMENT_ORIGIN_MARKER: &str = "EDITSYNC_ENVIRONMENT";

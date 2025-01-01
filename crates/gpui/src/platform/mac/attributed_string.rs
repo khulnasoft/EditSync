@@ -7,7 +7,7 @@ use objc::{class, msg_send, sel, sel_impl};
 /// to the clipboard. This adds access to those APIs.
 
 #[allow(non_snake_case)]
-pub trait NSAttributedString: Sieditsync {
+pub trait NSAttributedString: Sized {
     unsafe fn alloc(_: Self) -> id {
         msg_send![class!(NSAttributedString), alloc]
     }
@@ -60,7 +60,7 @@ mod tests {
     fn test_nsattributed_string() {
         // TODO move these to parent module once it's actually ready to be used
         #[allow(non_snake_case)]
-        pub trait NSTextAttachment: Sieditsync {
+        pub trait NSTextAttachment: Sized {
             unsafe fn alloc(_: Self) -> id {
                 msg_send![class!(NSTextAttachment), alloc]
             }

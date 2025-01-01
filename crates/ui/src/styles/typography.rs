@@ -7,7 +7,7 @@ use theme::{ActiveTheme, ThemeSettings};
 use crate::{rems_from_px, Color};
 
 /// Extends [`gpui::Styled`] with typography-related styling methods.
-pub trait StyledTypography: Styled + Sieditsync {
+pub trait StyledTypography: Styled + Sized {
     /// Sets the font family to the buffer font.
     fn font_buffer(self, cx: &WindowContext) -> Self {
         let settings = ThemeSettings::get_global(cx);

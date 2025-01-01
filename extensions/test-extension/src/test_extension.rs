@@ -1,7 +1,7 @@
-use std::fs;
 use editsync::lsp::CompletionKind;
 use editsync::{CodeLabel, CodeLabelSpan, LanguageServerId};
 use editsync_extension_api::{self as editsync, Result};
+use std::fs;
 
 struct TestExtension {
     cached_binary_path: Option<String>,

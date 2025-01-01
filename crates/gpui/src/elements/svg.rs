@@ -74,7 +74,7 @@ impl Element for Svg {
         hitbox: &mut Option<Hitbox>,
         cx: &mut WindowContext,
     ) where
-        Self: Sieditsync,
+        Self: Sized,
     {
         self.interactivity
             .paint(global_id, bounds, hitbox.as_ref(), cx, |style, cx| {

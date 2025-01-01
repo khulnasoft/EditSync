@@ -11,7 +11,8 @@ use crate::platforms::{platform_linux, platform_mac, platform_windows};
 use auto_update::AutoUpdateStatus;
 use call::ActiveCall;
 use client::{Client, UserStore};
-use feature_flags::{FeatureFlagAppExt, EditsyncPro};
+use editsync_actions::{OpenBrowser, OpenRecent, OpenRemote};
+use feature_flags::{EditsyncPro, FeatureFlagAppExt};
 use gpui::{
     actions, div, px, Action, AnyElement, AppContext, Decorations, Element, InteractiveElement,
     Interactivity, IntoElement, Model, MouseButton, ParentElement, Render, Stateful,
@@ -29,7 +30,6 @@ use ui::{
 };
 use util::ResultExt;
 use workspace::{notifications::NotifyResultExt, Workspace};
-use editsync_actions::{OpenBrowser, OpenRecent, OpenRemote};
 
 #[cfg(feature = "stories")]
 pub use stories::*;
@@ -531,7 +531,9 @@ impl TitleBar {
             client::Status::UpgradeRequired => {
                 let auto_updater = auto_update::AutoUpdater::get(cx);
                 let label = match auto_updater.map(|auto_update| auto_update.read(cx).status()) {
-                    Some(AutoUpdateStatus::Updated { .. }) => "Please restart Editsync to Collaborate",
+                    Some(AutoUpdateStatus::Updated { .. }) => {
+                        "Please restart Editsync to Collaborate"
+                    }
                     Some(AutoUpdateStatus::Installing)
                     | Some(AutoUpdateStatus::Downloading)
                     | Some(AutoUpdateStatus::Checking) => "Updating...",

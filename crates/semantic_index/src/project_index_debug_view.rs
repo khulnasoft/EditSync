@@ -289,7 +289,7 @@ impl Item for ProjectIndexDebugView {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| Self::new(self.index.clone(), cx)))
     }

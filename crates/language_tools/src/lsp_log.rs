@@ -1017,7 +1017,7 @@ impl Item for LspLogView {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Self>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| {
             let mut new_view = Self::new(self.project.clone(), self.log_store.clone(), cx);

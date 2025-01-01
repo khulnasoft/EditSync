@@ -7,7 +7,7 @@ use std::ops::Range;
 /// This input handler can then be assigned during paint by calling [`WindowContext::handle_input`].
 ///
 /// See [`InputHandler`] for details on how to implement each method.
-pub trait ViewInputHandler: 'static + Sieditsync {
+pub trait ViewInputHandler: 'static + Sized {
     /// See [`InputHandler::text_for_range`] for details
     fn text_for_range(
         &mut self,

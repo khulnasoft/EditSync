@@ -682,7 +682,7 @@ impl Item for Editor {
         cx: &mut ViewContext<Self>,
     ) -> Option<View<Editor>>
     where
-        Self: Sieditsync,
+        Self: Sized,
     {
         Some(cx.new_view(|cx| self.clone(cx)))
     }

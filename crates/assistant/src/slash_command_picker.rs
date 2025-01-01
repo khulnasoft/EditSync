@@ -293,7 +293,9 @@ impl<T: PopoverTrigger> RenderOnce for SlashCommandSelector<T> {
                         )
                         .into_any_element()
                 },
-                on_confirm: |cx| cx.open_url("https://editsync.khulnasoft.com/docs/extensions/slash-commands"),
+                on_confirm: |cx| {
+                    cx.open_url("https://editsync.khulnasoft.com/docs/extensions/slash-commands")
+                },
             }])
             .collect::<Vec<_>>();
 

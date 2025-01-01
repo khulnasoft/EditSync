@@ -178,7 +178,9 @@ impl NotificationPanel {
                 .log_err()
                 .flatten()
             {
-                Some(serde_json::from_str::<SerialieditsyncNotificationPanel>(&panel)?)
+                Some(serde_json::from_str::<SerialieditsyncNotificationPanel>(
+                    &panel,
+                )?)
             } else {
                 None
             };

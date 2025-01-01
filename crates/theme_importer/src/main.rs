@@ -19,7 +19,8 @@ use theme::{Appearance, AppearanceContent, ThemeFamilyContent};
 use crate::vscode::VsCodeTheme;
 use crate::vscode::VsCodeThemeConverter;
 
-const EDITSYNC_THEME_SCHEMA_URL: &str = "https://editsync.khulnasoft.com/public/schema/themes/v0.2.0.json";
+const EDITSYNC_THEME_SCHEMA_URL: &str =
+    "https://editsync.khulnasoft.com/public/schema/themes/v0.2.0.json";
 
 #[derive(Debug, Deserialize)]
 struct FamilyMetadata {
