@@ -6,6 +6,7 @@
 use std::env;
 
 fn main() {
+    println!("cargo:rustc-check-cfg=cfg(gles)");
     let target = env::var("CARGO_CFG_TARGET_OS");
     println!("cargo::rustc-check-cfg=cfg(gles)");
     match target.as_deref() {

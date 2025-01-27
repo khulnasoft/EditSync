@@ -148,8 +148,8 @@ async fn validate_api_token<B>(mut req: Request<B>, next: Next<B>) -> impl IntoR
         Ok(claims) => {
             if state.db.is_access_token_revoked(&claims.jti).await? {
                 return Err(Error::http(
-                    StatusCode::UNAUTHORIEDITSYNC,
-                    "unauthorieditsync".to_string(),
+                    StatusCode::UNAUTHORIZED,
+                    "unauthorized".to_string(),
                 ));
             }
 
@@ -163,8 +163,8 @@ async fn validate_api_token<B>(mut req: Request<B>, next: Next<B>) -> impl IntoR
             Ok::<_, Error>(next.run(req).await.into_response())
         }
         Err(ValidateLlmTokenError::Expired) => Err(Error::Http(
-            StatusCode::UNAUTHORIEDITSYNC,
-            "unauthorieditsync".to_string(),
+            StatusCode::UNAUTHORIZED,
+            "unauthorized".to_string(),
             [(
                 HeaderName::from_static(EXPIRED_LLM_TOKEN_HEADER_NAME),
                 HeaderValue::from_static("true"),
@@ -173,8 +173,8 @@ async fn validate_api_token<B>(mut req: Request<B>, next: Next<B>) -> impl IntoR
             .collect(),
         )),
         Err(_err) => Err(Error::http(
-            StatusCode::UNAUTHORIEDITSYNC,
-            "unauthorieditsync".to_string(),
+            StatusCode::UNAUTHORIZED,
+            "unauthorized".to_string(),
         )),
     }
 }

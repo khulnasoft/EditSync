@@ -307,7 +307,7 @@ jobs:
       - name: Draft release notes
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: |
-          mkdir -p target/
+          xx
           # Ignore any errors that occur while drafting release notes to not fail the build.
           script/draft-release-notes "$RELEASE_VERSION" "$RELEASE_CHANNEL" > target/release-notes.md || true
           script/create-draft-release target/release-notes.md
