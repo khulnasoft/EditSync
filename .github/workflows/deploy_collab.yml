@@ -79,11 +79,11 @@ jobs:
         run: |
           docker build -f Dockerfile-collab \
             --build-arg GITHUB_SHA=$GITHUB_SHA \
-            --tag registry.digitalocean.com/editsync/collab:$GITHUB_SHA \
+            --tag docker.io/khulnasoft/collab:$GITHUB_SHA \
             .
 
       - name: Publish docker image
-        run: docker push registry.digitalocean.com/editsync/collab:${GITHUB_SHA}
+        run: docker push docker.io/khulnasoft/collab:${GITHUB_SHA}
 
       - name: Prune Docker system
         run: docker system prune  --filter 'until=72h' -f
@@ -133,7 +133,7 @@ jobs:
           export_vars_for_environment $EDITSYNC_KUBE_NAMESPACE
 
           export EDITSYNC_DO_CERTIFICATE_ID=$(doctl compute certificate list --format ID --no-header)
-          export EDITSYNC_IMAGE_ID="registry.digitalocean.com/editsync/collab:${GITHUB_SHA}"
+          export EDITSYNC_IMAGE_ID="docker.io/khulnasoft/collab:${GITHUB_SHA}"
 
           export EDITSYNC_SERVICE_NAME=collab
           export EDITSYNC_LOAD_BALANCER_SIZE_UNIT=$EDITSYNC_COLLAB_LOAD_BALANCER_SIZE_UNIT

@@ -129,6 +129,7 @@ welcome.workspace = true
 workspace.workspace = true
 editsync_actions.workspace = true
 zeta.workspace = true
+wasmtime-c-api-impl = "29.0.1"
 
 [target.'cfg(target_os = "windows")'.dependencies]
 windows.workspace = true
