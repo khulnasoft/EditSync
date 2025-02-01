@@ -37,7 +37,7 @@ serde_derive.workspace = true
 serde_json.workspace = true
 settings.workspace = true
 theme.workspace = true
-tokio = { version = "1.15", features = ["full"], optional = true }
+tokio = { version = "1.43", features = ["full"], optional = true }
 ui.workspace = true
 util.workspace = true
 vim_mode_setting.workspace = true

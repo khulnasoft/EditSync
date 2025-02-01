@@ -31,7 +31,7 @@ collections.workspace = true
 cpal = "0.15"
 futures.workspace = true
 gpui.workspace = true
-http_2 = { package = "http", version = "0.2.1" }
+http_2 = { package = "http", version = "0.2.12" }
 livekit_server.workspace = true
 log.workspace = true
 media.workspace = true

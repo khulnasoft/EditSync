@@ -85,7 +85,7 @@ impl<T> Outline<T> {
         }
     }
 
-    /// Find the most similar symbol to the provided query using normalieditsync Levenshtein distance.
+    /// Find the most similar symbol to the provided query using normalized Levenshtein distance.
     pub fn find_most_similar(&self, query: &str) -> Option<(SymbolPath, &OutlineItem<T>)> {
         const SIMILARITY_THRESHOLD: f64 = 0.6;
 
@@ -94,7 +94,7 @@ impl<T> Outline<T> {
             .iter()
             .enumerate()
             .map(|(index, candidate)| {
-                let similarity = strsim::normalieditsync_levenshtein(&candidate.string, query);
+                let similarity = strsim::normalized_levenshtein(&candidate.string, query);
                 (index, similarity)
             })
             .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap())?;

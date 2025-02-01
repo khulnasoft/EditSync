@@ -131,7 +131,7 @@ pub async fn validate_api_token<B>(req: Request<B>, next: Next<B>) -> impl IntoR
 
     if token != state.config.api_token {
         Err(Error::http(
-            StatusCode::UNAUTHORIEDITSYNC,
+            StatusCode::UNAUTHORIZED,
             "invalid authorization token".to_string(),
         ))?
     }

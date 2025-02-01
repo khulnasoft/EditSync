@@ -811,7 +811,7 @@ impl LanguageServer {
             }
             self.capabilities = RwLock::new(response.capabilities);
 
-            self.notify::<notification::Initialieditsync>(InitialieditsyncParams {})?;
+            self.notify::<notification::Initialized>(InitializedParams {})?;
             Ok(Arc::new(self))
         })
     }

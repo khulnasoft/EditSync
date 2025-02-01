@@ -244,7 +244,7 @@ impl From<WebsocketError> for EstablishConnectionError {
     fn from(error: WebsocketError) -> Self {
         if let WebsocketError::Http(response) = &error {
             match response.status() {
-                StatusCode::UNAUTHORIEDITSYNC => {
+                StatusCode::UNAUTHORIZED => {
                     return EstablishConnectionError::Unauthorieditsync
                 }
                 StatusCode::UPGRADE_REQUIRED => return EstablishConnectionError::UpgradeRequired,
@@ -254,7 +254,6 @@ impl From<WebsocketError> for EstablishConnectionError {
         EstablishConnectionError::Other(error.into())
     }
 }
-
 impl EstablishConnectionError {
     pub fn other(error: impl Into<anyhow::Error> + Send + Sync) -> Self {
         Self::Other(error.into())

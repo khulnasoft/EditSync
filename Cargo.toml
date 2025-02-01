@@ -339,42 +339,42 @@ zeta = { path = "crates/zeta" }
 aho-corasick = "1.1"
 alacritty_terminal = "0.24"
 any_vec = "0.14"
-anyhow = "1.0.86"
-arrayvec = { version = "0.7.4", features = ["serde"] }
+anyhow = "1.0.95"
+arrayvec = { version = "0.7.6", features = ["serde"] }
 ashpd = { version = "0.10", default-features = false, features = ["async-std"]}
-async-compat = "0.2.1"
+async-compat = "0.2.4"
 async-compression = { version = "0.4", features = ["gzip", "futures-io"] }
 async-dispatcher = "0.1"
 async-fs = "1.6"
 async-pipe = { git = "https://github.com/khulnasoft-lab/async-pipe-rs", rev = "82d00a04211cf4e1236029aa03e6b6ce2a74c553" }
-async-recursion = "1.0.0"
+async-recursion = "1.1.1"
 async-tar = "0.5.0"
 async-trait = "0.1"
 async-tungstenite = "0.28"
 async-watch = "0.3.1"
 async_zip = { version = "0.0.17", features = ["deflate", "deflate64"] }
 base64 = "0.22"
-bitflags = "2.6.0"
+bitflags = "2.8.0"
 blade-graphics = { git = "https://github.com/kvark/blade", rev = "091a8401033847bb9b6ace3fcf70448d069621c5" }
 blade-macros = { git = "https://github.com/kvark/blade", rev = "091a8401033847bb9b6ace3fcf70448d069621c5" }
 blade-util = { git = "https://github.com/kvark/blade", rev = "091a8401033847bb9b6ace3fcf70448d069621c5" }
-blake3 = "1.5.3"
-bytes = "1.0"
+blake3 = "1.5.5"
+bytes = "1.9"
 cargo_metadata = "0.19"
 cargo_toml = "0.21"
 chrono = { version = "0.4", features = ["serde"] }
-clap = { version = "4.4", features = ["derive"] }
+clap = { version = "4.5", features = ["derive"] }
 cocoa = "0.26"
 cocoa-foundation = "0.2.0"
 convert_case = "0.6.0"
-core-foundation = "0.9.3"
-core-foundation-sys = "0.8.6"
-ctor = "0.2.6"
-dashmap = "6.0"
-derive_more = "0.99.17"
+core-foundation = "0.9.4"
+core-foundation-sys = "0.8.7"
+ctor = "0.2.9"
+dashmap = "6.1"
+derive_more = "0.99.18"
 dirs = "4.0"
 ec4rs = "1.1"
-emojis = "0.6.1"
+emojis = "0.6.4"
 env_logger = "0.11"
 exec = "0.3.1"
 fancy-regex = "0.14.0"
@@ -384,15 +384,15 @@ futures-batch = "0.6.1"
 futures-lite = "1.13"
 git2 = { version = "0.19", default-features = false }
 globset = "0.4"
-handlebars = "4.3"
+handlebars = "4.5"
 heed = { version = "0.21.0", features = ["read-txn-no-tls"] }
 hex = "0.4.3"
 html5ever = "0.27.0"
 hyper = "0.14"
-http = "1.1"
-ignore = "0.4.22"
-image = "0.25.1"
-indexmap = { version = "1.6.2", features = ["serde"] }
+http = "1.2"
+ignore = "0.4.23"
+image = "0.25.5"
+indexmap = { version = "1.9.3", features = ["serde"] }
 indoc = "2"
 itertools = "0.13.0"
 jsonwebtoken = "9.3"
@@ -402,15 +402,15 @@ libc = "0.2"
 libsqlite3-sys = { version = "0.30.1", features = ["bundled"] }
 linkify = "0.10.0"
 livekit = { git = "https://github.com/khulnasoft-lab/livekit-rust-sdks", rev="060964da10574cd9bf06463a53bf6e0769c5c45e", features = ["dispatcher", "services-dispatcher", "rustls-tls-native-roots"], default-features = false }
-log = { version = "0.4.16", features = ["kv_unstable_serde", "serde"] }
+log = { version = "0.4.25", features = ["kv_unstable_serde", "serde"] }
 markup5ever_rcdom = "0.3.0"
 nanoid = "0.4"
 nbformat = { version = "0.9.0" }
 nix = "0.29"
 num-format = "0.4.4"
-ordered-float = "2.1.1"
-palette = { version = "0.7.5", default-features = false, features = ["std"] }
-parking_lot = "0.12.1"
+ordered-float = "2.10.1"
+palette = { version = "0.7.6", default-features = false, features = ["std"] }
+parking_lot = "0.12.3"
 pathdiff = "0.2"
 pet = { git = "https://github.com/microsoft/python-environment-tools.git", rev = "ffcbf3f28c46633abd5448a52b1f396c322e0d6c" }
 pet-fs = { git = "https://github.com/microsoft/python-environment-tools.git", rev = "ffcbf3f28c46633abd5448a52b1f396c322e0d6c" }
@@ -419,15 +419,15 @@ pet-core = { git = "https://github.com/microsoft/python-environment-tools.git", 
 pet-poetry = { git = "https://github.com/microsoft/python-environment-tools.git", rev = "ffcbf3f28c46633abd5448a52b1f396c322e0d6c" }
 pet-reporter = { git = "https://github.com/microsoft/python-environment-tools.git", rev = "ffcbf3f28c46633abd5448a52b1f396c322e0d6c" }
 postage = { version = "0.5", features = ["futures-traits"] }
-pretty_assertions = { version = "1.3.0", features = ["unstable"] }
+pretty_assertions = { version = "1.4.1", features = ["unstable"] }
 profiling = "1"
 prost = "0.9"
 prost-build = "0.9"
 prost-types = "0.9"
-pulldown-cmark = { version = "0.12.0", default-features = false }
+pulldown-cmark = { version = "0.12.2", default-features = false }
 rand = "0.8.5"
-rayon = "1.8"
-regex = "1.5"
+rayon = "1.10"
+regex = "1.11"
 repair_json = "0.1.0"
 reqwest = { git = "https://github.com/khulnasoft-lab/reqwest.git", rev = "fd110f6998da16bbca97b6dddda9be7827c50e29", default-features = false, features = [
     "charset",
@@ -437,14 +437,14 @@ reqwest = { git = "https://github.com/khulnasoft-lab/reqwest.git", rev = "fd110f
     "socks",
     "stream",
 ] }
-rsa = "0.9.6"
+rsa = "0.9.7"
 runtimelib = { version = "0.24.0", default-features = false, features = [
     "async-dispatcher-runtime",
 ] }
-rustc-demangle = "0.1.23"
-rust-embed = { version = "8.4", features = ["include-exclude"] }
+rustc-demangle = "0.1.24"
+rust-embed = { version = "8.5", features = ["include-exclude"] }
 rustls = "0.21.12"
-rustls-native-certs = "0.8.0"
+rustls-native-certs = "0.8.1"
 schemars = { version = "0.8", features = ["impl_json_schema"] }
 semver = "1.0"
 serde = { version = "1.0", features = ["derive", "rc"] }
@@ -456,21 +456,21 @@ serde_json_lenient = { version = "0.2", features = [
 ] }
 serde_repr = "0.1"
 sha2 = "0.10"
-shellexpand = "2.1.0"
+shellexpand = "2.1.2"
 shlex = "1.3.0"
 signal-hook = "0.3.17"
 similar = "1.3"
 simplelog = "0.12.2"
-smallvec = { version = "1.6", features = ["union"] }
-smol = "1.2"
+smallvec = { version = "1.13", features = ["union"] }
+smol = "1.3"
 sqlformat = "0.2"
 strsim = "0.11"
 strum = { version = "0.25.0", features = ["derive"] }
-subtle = "2.5.0"
-sys-locale = "0.3.1"
-sysinfo = "0.31.0"
-tempfile = "3.9.0"
-thiserror = "1.0.29"
+subtle = "2.6.1"
+sys-locale = "0.3.2"
+sysinfo = "0.31.4"
+tempfile = "3.16.0"
+thiserror = "1.0.69"
 tiktoken-rs = "0.6.0"
 time = { version = "0.3", features = [
     "macros",
@@ -489,7 +489,7 @@ tree-sitter-c = "0.23"
 tree-sitter-cpp = "0.23"
 tree-sitter-css = "0.23"
 tree-sitter-elixir = "0.3"
-tree-sitter-embedded-template = "0.23.0"
+tree-sitter-embedded-template = "0.23.2"
 tree-sitter-go = "0.23"
 tree-sitter-go-mod = { git = "https://github.com/khulnasoft-lab/tree-sitter-go-mod", rev = "a9aea5e358cde4d0f8ff20b7bc4fa311e359c7ca", package = "tree-sitter-gomod" }
 tree-sitter-gowork = { git = "https://github.com/khulnasoft-lab/tree-sitter-go-work", rev = "acb0617bf7f4fda02c6217676cc64acb89536dc7" }
@@ -505,12 +505,12 @@ tree-sitter-ruby = "0.23"
 tree-sitter-rust = "0.23"
 tree-sitter-typescript = "0.23"
 tree-sitter-yaml = { git = "https://github.com/khulnasoft-lab/tree-sitter-yaml", rev = "baff0b51c64ef6a1fb1f8390f3ad6015b83ec13a" }
-unicase = "2.6"
-unindent = "0.1.7"
-unicode-segmentation = "1.10"
+unicase = "2.8"
+unindent = "0.1.11"
+unicode-segmentation = "1.12"
 unicode-script = "0.5.7"
-url = "2.2"
-uuid = { version = "1.1.2", features = ["v4", "v5", "v7", "serde"] }
+url = "2.5"
+uuid = { version = "1.12.1", features = ["v4", "v5", "v7", "serde"] }
 wasmparser = "0.215"
 wasm-encoder = "0.215"
 wasmtime = { version = "24", default-features = false, features = [
@@ -521,7 +521,7 @@ wasmtime = { version = "24", default-features = false, features = [
     "component-model",
 ] }
 wasmtime-wasi = "24"
-which = "6.0.0"
+which = "6.0.3"
 wit-component = "0.201"
 zstd = "0.11"
 metal = "0.30"
