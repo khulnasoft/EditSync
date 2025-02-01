@@ -32,7 +32,7 @@ impl Parse for DynamicSpacingValue {
     fn parse(input: ParseStream) -> syn::Result<Self> {
         if input.peek(syn::token::Paren) {
             let content;
-            syn::parenthesieditsync!(content in input);
+            syn::parenthesized!(content in input);
             let a: LitInt = content.parse()?;
             content.parse::<Token![,]>()?;
             let b: LitInt = content.parse()?;
@@ -44,7 +44,6 @@ impl Parse for DynamicSpacingValue {
         }
     }
 }
-
 /// Derives the spacing method for the `DynamicSpacing` enum.
 pub fn derive_spacing(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DynamicSpacingInput);
