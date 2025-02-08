@@ -245,7 +245,7 @@ impl From<WebsocketError> for EstablishConnectionError {
         if let WebsocketError::Http(response) = &error {
             match response.status() {
                 StatusCode::UNAUTHORIZED => {
-                    return EstablishConnectionError::Unauthorieditsync
+                    return EstablishConnectionError::Unauthorized
                 }
                 StatusCode::UPGRADE_REQUIRED => return EstablishConnectionError::UpgradeRequired,
                 _ => {}
